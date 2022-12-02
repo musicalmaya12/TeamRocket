@@ -1,0 +1,58 @@
+.mood-input-container {
+    text-align: center;
+    width: 20em;
+    position: relative;
+    transition: all 0.2s;
+}
+
+.MuiTextField-root {
+    width: 60%;
+    font-family: inherit !important;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+}
+
+.MuiTextField-root > label {
+    border-color: white !important;
+    font-family: inherit !important;
+    color: rgba(255, 255, 255, 0.8) !important;
+    font-size: 3rem;
+}
+
+.MuiTextField-root > label.Mui-focused {
+    color: white !important;
+    font-size: 3rem;
+}
+
+.MuiInputBase-root {
+    font-family: inherit !important;
+    font-size: 3rem !important;
+}
+
+.MuiFilledInput-input {
+    padding-top: 50px !important;
+    font-family: inherit !important;
+    color: #034341 !important;
+    font-weight: 800 !important;
+}
+
+.MuiFilledInput-root:after {
+    border-bottom: 2px solid white !important;
+}
+
+.MuiInputLabel-root {
+    font-size: 3rem;
+}
+
+.MuiButton-root {
+    font-size: 2rem !important;
+    font-family: inherit !important;
+    color: white !important;
+    background-color:  #034341 !important;
+    border-color: #023331 !important;
+    border-width: 3px !important;
+}
+
+.MuiButton-root:hover {
+    background-color:  #023331 !important;
+}
