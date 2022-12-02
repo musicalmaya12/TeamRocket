@@ -1,20 +1,18 @@
 import pickle
 from typing import  List
 import tabulate
+import pandas as pd
 
 
-def get_data():
+def get_data()-> pd.DataFrame:
     song_list: List[dict]
     with open('LyricsFetcher/songs.pkl', 'rb') as f:
         song_list = pickle.load(f)
-    return song_list
+    df = pd.DataFrame.from_records(song_list)
+    return df
 
-def print_dataset(dataset):
-    header = dataset[0].keys()
-    rows =  [x.values() for x in dataset][:10]
-    print(tabulate.tabulate(rows, header))
 
 
 dataset = get_data()
-print(dataset[60])
+print(dataset.head())
 #print_dataset(dataset)
