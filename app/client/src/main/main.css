@@ -1,0 +1,76 @@
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300);
+
+body {
+    font-family: 'Source Sans Pro', sans-serif;
+    color: white;
+    font-weight: 300;
+}
+
+.main-container {
+    background: #50a3a2;
+    background: -webkit-linear-gradient(top left, #045a58 0%, #00872c 100%);
+    background: -moz-linear-gradient(top left, #045a58 0%, #20ae73 100%);
+    background: -o-linear-gradient(top left, #045a58 0%, #20ae73 100%);
+    background: linear-gradient(to bottom right, #045a58 0%, #20ae73 100%);
+        
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+
+.title {
+    font-size: calc(45px + 2vmin);
+    padding: 0.5em;
+}
+
+.input-container {
+    margin: 3em auto;
+    text-align: center;
+    font-size: 5em;
+    width: 20em;
+    background-repeat: no-repeat;
+    background-size: 90% 100%;
+    background-position-x: 0.1em ;
+    position: relative;
+    transition: all 0.2s;
+}
+
+form {
+    padding: 20px 0;
+    position: relative;
+    z-index: 2;
+}
+
+/* input {
+    display: block;
+    appearance: none;
+    outline: 0;
+    border: 1px solid fade(white, 40%);
+    background-color: fade(white, 20%);
+    width: 250px;
+    
+    border-radius: 3px;
+    padding: 10px 15px;
+    margin: 0 auto 10px auto;
+    display: block;
+    text-align: center;
+    font-size: 18px;
+    
+    color: white;
+    
+    transition-duration: 0.25s;
+    font-weight: 300;
+    
+    /* &:hover{
+      background-color: fade(white, 40%);
+    }
+    
+    &:focus{
+      background-color: white;
+      width: 300px;
+      
+      color: @prim;
+    } 
+} */
