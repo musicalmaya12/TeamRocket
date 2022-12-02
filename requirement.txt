@@ -1,0 +1,8 @@
+flair == 0.11
+lyricsgenius
+requests
+pickle
+csv
+fastapi
+uvicorn
+pydantic
