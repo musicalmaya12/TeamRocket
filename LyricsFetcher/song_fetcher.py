@@ -21,7 +21,7 @@ def process_lyrics(lyrics):
 def get_music_by_artiste(artiste, song_count = 10):
     song_list = []
     try:
-        genius = Genius(TOKEN, timeout=10, retries=5)
+        genius = Genius(TOKEN, retries=3)
         songs = genius.search_artist(artiste, sort="popularity", max_songs=song_count)
         if songs is None:
             return []
