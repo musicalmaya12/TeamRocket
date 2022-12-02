@@ -1,0 +1,1 @@
+Credit to https://gist.github.com/mbejda/9912f7a366c62c1f296c for artiste names
