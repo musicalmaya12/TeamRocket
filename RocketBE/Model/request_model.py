@@ -13,5 +13,4 @@ class MoodRequest(BaseModel):
 
 class MoodRespond(BaseModel):
     sentiment: str
-    score: float
     playlist: List[Song]

@@ -1,6 +1,6 @@
 
 import random
-from typing import List
+from typing import List, Tuple
 from RocketBE.Model.request_model import Song
 from RocketBE.SongProcessor.processor import SongProcessor
 
@@ -11,7 +11,7 @@ class FlairSentimentAnalyzer(SongProcessor):
         super().__init__()
         self.process_data()
 
-    def process_input(self, user_mood) -> List[Song] :
+    def process_input(self, user_mood) -> Tuple[List[Song], str]:
         random_ten_items = random.sample(super().get_data(), 10)
         result: List[Song] = []
         for song in random_ten_items:
@@ -24,7 +24,7 @@ class FlairSentimentAnalyzer(SongProcessor):
                     )
             )
               
-        return result   
+        return result, "excited"
             
         # return [
         #     Song(

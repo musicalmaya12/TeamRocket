@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import List
+from typing import List, Tuple
 import pickle
 from typing import  List
 
@@ -10,7 +10,7 @@ SONGFILE = "LyricsFetcher/songs.pkl"
 class SongProcessor(ABC):
 
     @abstractmethod
-    def process_input(self, user_mood) -> List[Song]:
+    def process_input(self, user_mood) ->  Tuple[List[Song], str]:
         pass
 
     @abstractmethod

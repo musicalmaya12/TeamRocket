@@ -24,10 +24,9 @@ async def get_mood_songs(request: MoodRequest):
             detail='Phrase cannot be empty',
         )
 
-    user_songs =  flair_processor.process_input(request.phrase)
+    user_songs, sentiment =  flair_processor.process_input(request.phrase)
     return MoodRespond(
-        sentiment= "excited",
-        score = "0.99",
+        sentiment=sentiment,
         playlist = user_songs
     )
 
