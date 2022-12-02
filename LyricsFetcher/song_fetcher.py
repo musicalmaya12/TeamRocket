@@ -4,7 +4,7 @@ from lyricsgenius import Genius
 import pickle
 import csv
 
-TOKEN = "ZXMU2V7JQkAXdVbM95IzO85_79XJRkrtwLBbaE_MrMByHocNeeOAWplE44dSeKoP"
+TOKEN = "<TOKEN>"
 TOTAL_ARTISTES = 10 # must be less than 3k
 
 def process_lyrics(lyrics):
