@@ -1,8 +1,8 @@
 # The Mood Playlist Generator
 
 To install:
-1.  `pip install -r requirements.txt`
-2. `cd app`
+1. `cd app`
+2.  `pip install -r requirements.txt` 
 3. `npm install`
 
 To run the application:
@@ -10,9 +10,10 @@ To run the application:
 2. `npm start`
 
 #### Backend Initiatization
-1. install stuff `pip install -r requirements.txt`
-2. Run `uvicorn RocketBE.main:app --reload`
-3. go to `http://127.0.0.1:8000/docs`
+1. `cd app`
+2. install stuff `pip install -r requirements.txt`
+3. Run `uvicorn RocketBE.main:app --reload`
+4. go to `http://127.0.0.1:8000/docs`
 
 `POST: URL http://127.0.0.1:8000/get_mood_songs`
 
