@@ -6,7 +6,7 @@ from typing import  List
 
 from RocketBE.Model.request_model import Song
 
-SONGFILE = "LyricsFetcher/songs.pkl"
+SONGFILE = "../LyricsFetcher/songs.pkl"
 class SongProcessor(ABC):
 
     @abstractmethod
