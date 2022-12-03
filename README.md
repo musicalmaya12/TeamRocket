@@ -1,12 +1,13 @@
 # The Mood Playlist Generator
 
-To run the application:
-```
-cd app
-npm install
-npm start
-```
+To install:
+1.  `pip install -r requirements.txt`
+2. `cd app`
+3. `npm install`
 
+To run the application:
+1. `cd app`
+2. `npm start`
 
 #### Backend Initiatization
 1. install stuff `pip install -r requirements.txt`

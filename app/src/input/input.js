@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import './input.css';
-import { getTracks } from '../services/spotify';
+import { getMoodPlaylist } from '../services/spotify';
 
 export default function Input({hintText}) {
     const [message, setMessage] = useState('');
@@ -14,7 +14,7 @@ export default function Input({hintText}) {
     const handleClick = () => {
         // TO-DO: This getTracks method should call the backend to get playlist. 
         // Uncomment once getTracks method works.
-        getTracks(message);
+        getMoodPlaylist(message);
         console.log(message);
     }
 

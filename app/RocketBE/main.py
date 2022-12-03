@@ -1,6 +1,7 @@
 from typing import Union
 
 from fastapi import FastAPI, HTTPException, status
+from fastapi.middleware.cors import CORSMiddleware
 from RocketBE.Model.request_model import MoodRequest, MoodRespond
 from RocketBE.SongProcessor.flair_processor import FlairSentimentAnalyzer
 
@@ -8,6 +9,16 @@ from RocketBE.SongProcessor.flair_processor import FlairSentimentAnalyzer
 app = FastAPI()
 
 flair_processor = FlairSentimentAnalyzer()
+
+origins = ["*"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/")
 def fetch():
