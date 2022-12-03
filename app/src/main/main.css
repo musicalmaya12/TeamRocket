@@ -26,15 +26,18 @@ body {
 }
 
 .input-container {
-    margin: 3em auto;
+    margin: 0;
     text-align: center;
     font-size: 5em;
-    width: 20em;
+    width: 100%;
     background-repeat: no-repeat;
     background-size: 90% 100%;
     background-position-x: 0.1em ;
-    position: relative;
+    position: absolute;
     transition: all 0.2s;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
 }
 
 form {
