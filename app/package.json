@@ -22,7 +22,8 @@
     "build": "react-scripts build",
     "start": "concurrently \"npm run client\" \"npm run server\"",
     "client": "react-scripts start",
-    "server": "node server/index.js",
+    "server": "python -m uvicorn RocketBE.main:app --reload",
+    "servers": "node server/index.js",
     "eject": "react-scripts eject",
     "test": "react-scripts test"
   },
@@ -32,6 +33,7 @@
       "react-app/jest"
     ]
   },
+  "proxy": "http://localhost:8000/",
   "browserslist": {
     "production": [
       ">0.2%",

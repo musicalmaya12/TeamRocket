@@ -1,6 +1,6 @@
 .mood-input-container {
     text-align: center;
-    width: 20em;
+    width: 100%;
     position: relative;
     transition: all 0.2s;
 }
@@ -45,12 +45,12 @@
 }
 
 .MuiButton-root {
-    font-size: 2rem !important;
+    font-size: 1.5rem !important;
     font-family: inherit !important;
     color: white !important;
     background-color:  #034341 !important;
     border-color: #023331 !important;
-    border-width: 3px !important;
+    border-width: 0px !important;
 }
 
 .MuiButton-root:hover {
