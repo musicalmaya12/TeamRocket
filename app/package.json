@@ -24,7 +24,6 @@
     "start": "concurrently \"npm run client\" \"npm run server\"",
     "client": "react-scripts start",
     "server": "python -m uvicorn RocketBE.main:app --reload",
-    "servers": "node server/index.js",
     "eject": "react-scripts eject",
     "test": "react-scripts test"
   },
