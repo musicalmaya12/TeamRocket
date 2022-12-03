@@ -21,7 +21,7 @@ export const getMoodPlaylist = (query) => {
         phrase: query
     }
 
-    fetch(MOOD_URL, {
+    return fetch(MOOD_URL, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -29,12 +29,6 @@ export const getMoodPlaylist = (query) => {
         body: JSON.stringify(requestData)
     })
         .then(res => res.json())
-        .then((result) => {
-            console.log(result);
-        }, 
-        (error) => {
-            console.log(error);
-        })
 }
 
 export const getTracksFromSpotify = (query) => {

@@ -1,21 +1,29 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import './input.css';
 import { getMoodPlaylist } from '../services/spotify';
 
-export default function Input({hintText}) {
+export default function Input({ hintText }) {
     const [message, setMessage] = useState('');
+    const navigate = useNavigate();
 
     const handleChange = (event) => {
         setMessage(event.target.value);
     }
 
     const handleClick = () => {
-        // TO-DO: This getTracks method should call the backend to get playlist. 
-        // Uncomment once getTracks method works.
-        getMoodPlaylist(message);
-        console.log(message);
+        if (isStringEmpty(message)) {
+            return;
+        }
+
+        getMoodPlaylist(message)
+            .then((playlistData) => {
+                // This should work and log the random playlist 
+                console.log(playlistData);
+                navigate("/playlist", { state: playlistData });
+            });
     }
 
     return (
@@ -31,7 +39,11 @@ export default function Input({hintText}) {
             />
             <div>
                 <Button variant="outlined" onClick={handleClick}>Submit</Button>
-            </div> 
+            </div>
         </div>
     );
+}
+
+const isStringEmpty = (str) => {
+    return str.trim().length === 0;
 }
