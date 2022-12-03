@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import './input.css';
-import { getMoodPlaylist } from '../services/spotify';
+import { getMoodPlaylist } from '../services/generator';
 
 export default function Input({ hintText }) {
     const [message, setMessage] = useState('');
@@ -34,6 +34,9 @@ export default function Input({ hintText }) {
                 variant="filled"
                 className='input-field'
                 size="large"
+                inputProps={{
+                    autoComplete: 'off',
+                }}
                 onChange={handleChange}
                 value={message}
             />
