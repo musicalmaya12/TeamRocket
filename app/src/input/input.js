@@ -22,7 +22,7 @@ export default function Input({ hintText }) {
             .then((playlistData) => {
                 // This should work and log the random playlist 
                 console.log(playlistData);
-                navigate("/playlist", { state: playlistData });
+                navigate("/playlist", { state: {playlistData, message} });
             });
     }
 

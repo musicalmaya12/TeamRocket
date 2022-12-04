@@ -16,7 +16,7 @@ export const getSpotifyAuth = () => {
 }
 
 export const getTracksFromSpotify = (query) => {
-    getSpotifyAuth()
+    return getSpotifyAuth()
         .then((result) => {
             const token = result.access_token
 
@@ -36,6 +36,7 @@ export const getTracksFromSpotify = (query) => {
         .then(
             (result) => {
                 console.log(result);
+                return result
             },
             (error) => {
                 console.log(error);
