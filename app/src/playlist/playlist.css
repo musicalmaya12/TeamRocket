@@ -9,4 +9,19 @@
     width: 100%;
     height: 100%;
     overflow: hidden;
+    text-align: center;
+}
+
+.playlist-item {
+    display: inline-block;
+    width: 51%;
+}
+
+.song-title-link {
+    text-decoration: none;
+    color: white
+}
+
+.song-title-link:hover {
+    text-decoration: underline;
 }
