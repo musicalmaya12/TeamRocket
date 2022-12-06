@@ -1,5 +1,3 @@
-import base64
-import json
 import pickle
 from typing import List
 from flair.models import TextClassifier
@@ -9,7 +7,8 @@ import pandas as pd
 
 
 def get_data():
-    song_list = List[dict]
+    pos_song_list = List[dict]
+    neg_song_list = List[dict]
     with open('positive_songs.pkl', 'rb') as f:
         pos_song_list = pickle.load(f)
     positive_df = pd.DataFrame.from_records(pos_song_list)
@@ -21,7 +20,7 @@ def get_data():
 
 def playlist_getter(positive_df, negative_df):
     textClassifier = TextClassifier.load('en-sentiment')
-    phraseSentiment = Sentence('I love life')
+    phraseSentiment = Sentence('The grass is green and I guess thats fine.')
     textClassifier.predict(phraseSentiment)
     mySentiment = phraseSentiment.labels[0]
     songScore = phraseSentiment.score
@@ -32,11 +31,13 @@ def playlist_getter(positive_df, negative_df):
     if "POSITIVE" in str(mySentiment):
         # matching function
         closest_ten_pos = nsmallest(10, positive_df['score'], key=lambda x: abs(x - songScore))
+        print(closest_ten_pos)
         for value in closest_ten_pos:
+            song = positive_df.loc[positive_df['score'].eq(value)]
             ten_song_list.append({
-                "artiste": str(positive_df.loc[positive_df['score'].eq(value), 'artiste'].iloc[0]).strip(),
-                "title": str(positive_df.loc[positive_df['score'].eq(value), 'title'].iloc[0]).strip().replace('\xa0', ' '),
-                "thumbnail": str(positive_df.loc[positive_df['score'].eq(value), 'thumbnail'].iloc[0]).strip(),
+                "artiste": str([song, 'artiste']).strip(),
+                "title": str([song, 'title']).strip().replace('\xa0', ' '),
+                "thumbnail": str([song, 'thumbnail']).strip(),
             })
         print(ten_song_list)
     elif "NEGATIVE" in str(mySentiment):
