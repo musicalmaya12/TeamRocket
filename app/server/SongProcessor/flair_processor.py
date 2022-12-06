@@ -1,8 +1,8 @@
 
 import random
 from typing import List, Tuple
-from RocketBE.Model.request_model import Song
-from RocketBE.SongProcessor.processor import SongProcessor
+from app.server.Model.request_model import Song
+from app.server.SongProcessor.processor import SongProcessor
 
 
 class FlairSentimentAnalyzer(SongProcessor):

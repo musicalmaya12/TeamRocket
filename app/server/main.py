@@ -2,8 +2,8 @@ from typing import Union
 
 from fastapi import FastAPI, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
-from RocketBE.Model.request_model import MoodRequest, MoodRespond
-from RocketBE.SongProcessor.flair_processor import FlairSentimentAnalyzer
+from app.server.Model.request_model import MoodRequest, MoodRespond
+from app.server.SongProcessor.flair_processor import FlairSentimentAnalyzer
 
 
 app = FastAPI()
