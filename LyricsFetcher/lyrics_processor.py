@@ -9,18 +9,22 @@ import pandas as pd
 def get_data():
     pos_song_list = List[dict]
     neg_song_list = List[dict]
-    with open('positive_songs.pkl', 'rb') as f:
+    with open('2000songs_positive_df.pkl', 'rb') as f:
         pos_song_list = pickle.load(f)
     positive_df = pd.DataFrame.from_records(pos_song_list)
-    with open('negative_songs.pkl', 'rb') as f:
+    with open('2000songs_negative_df.pkl', 'rb') as f:
         neg_song_list = pickle.load(f)
     negative_df = pd.DataFrame.from_records(neg_song_list)
+    with open('2000songs.pkl', 'rb') as f:
+        song_list = pickle.load(f)
+    song_list = pd.DataFrame.from_records(song_list)
     playlist_getter(positive_df, negative_df)
+    #process_data(song_list)
     return positive_df, negative_df
 
 def playlist_getter(positive_df, negative_df):
     textClassifier = TextClassifier.load('en-sentiment')
-    phraseSentiment = Sentence('The grass is green and I guess thats fine.')
+    phraseSentiment = Sentence('I am feeling excited for the end of the semester!')
     textClassifier.predict(phraseSentiment)
     mySentiment = phraseSentiment.labels[0]
     songScore = phraseSentiment.score
@@ -31,13 +35,11 @@ def playlist_getter(positive_df, negative_df):
     if "POSITIVE" in str(mySentiment):
         # matching function
         closest_ten_pos = nsmallest(10, positive_df['score'], key=lambda x: abs(x - songScore))
-        print(closest_ten_pos)
         for value in closest_ten_pos:
-            song = positive_df.loc[positive_df['score'].eq(value)]
             ten_song_list.append({
-                "artiste": str([song, 'artiste']).strip(),
-                "title": str([song, 'title']).strip().replace('\xa0', ' '),
-                "thumbnail": str([song, 'thumbnail']).strip(),
+                "artiste": str(positive_df.loc[positive_df['score'].eq(value), 'artiste'].iloc[0]).strip(),
+                "title": str(positive_df.loc[positive_df['score'].eq(value), 'title'].iloc[0]).strip().replace('\xa0', ' '),
+                "thumbnail": str(positive_df.loc[positive_df['score'].eq(value), 'thumbnail'].iloc[0]).strip(),
             })
         print(ten_song_list)
     elif "NEGATIVE" in str(mySentiment):
@@ -88,7 +90,7 @@ def process_data(df):
     positive_df = pd.DataFrame({'title': positive_titles, 'artiste': positive_artists, 'thumbnail': positive_thumbnails, 'score': positive_scores, 'label': positive_labels})
     negative_df = pd.DataFrame({'title': negative_titles, 'artiste': negative_artists, 'thumbnail': negative_thumbnails, 'score': negative_scores, 'label': negative_labels})
 
-    positive_df.to_pickle("./positive_df.pkl")
-    negative_df.to_pickle("./negative_df.pkl")
+    positive_df.to_pickle("./2000songs_positive_df.pkl")
+    negative_df.to_pickle("./2000songs_negative_df.pkl")
 
 dataset = get_data()

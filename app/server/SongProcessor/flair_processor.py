@@ -54,10 +54,10 @@ class FlairSentimentAnalyzer(SongProcessor):
     def process_data(self) -> None:
         pos_song_list = List[dict]
         neg_song_list = List[dict]
-        with open('positive_songs.pkl', 'rb') as f:
+        with open('2000songs_positive_df.pkl', 'rb') as f:
             pos_song_list = pickle.load(f)
         self.positive_df = pd.DataFrame.from_records(pos_song_list)
-        with open('negative_songs.pkl', 'rb') as f:
+        with open('2000songs_negative_df.pkl', 'rb') as f:
             neg_song_list = pickle.load(f)
         self.negative_df = pd.DataFrame.from_records(neg_song_list)
         print('Hooray!!!!! Data processed!')
