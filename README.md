@@ -12,7 +12,7 @@ To run the application:
 #### Backend Initiatization
 1. `cd app`
 2. install stuff `pip install -r requirements.txt`
-3. Run `uvicorn RocketBE.main:app --reload`
+3. Run `uvicorn app.server.main:app --reload`
 4. go to `http://127.0.0.1:8000/docs`
 
 `POST: URL http://127.0.0.1:8000/get_mood_songs`
