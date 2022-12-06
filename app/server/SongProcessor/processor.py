@@ -2,9 +2,11 @@ from abc import ABC, abstractmethod
 from typing import List, Tuple
 import pickle
 from typing import  List
+try:
+    from app.server.Model.request_model import Song
+except:
+    from server.Model.request_model import Song
 
-
-from app.server.Model.request_model import Song
 
 SONGFILE = "./LyricsFetcher/songs.pkl"
 class SongProcessor(ABC):

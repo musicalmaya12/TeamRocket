@@ -2,9 +2,12 @@ from typing import Union
 
 from fastapi import FastAPI, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
-from app.server.Model.request_model import MoodRequest, MoodRespond
-from app.server.SongProcessor.flair_processor import FlairSentimentAnalyzer
-
+try:
+    from app.server.Model.request_model import MoodRequest, MoodRespond
+    from app.server.SongProcessor.flair_processor import FlairSentimentAnalyzer
+except:
+    from server.Model.request_model import MoodRequest, MoodRespond
+    from server.SongProcessor.flair_processor import FlairSentimentAnalyzer
 
 app = FastAPI()
 

@@ -5,9 +5,12 @@ from flair.models import TextClassifier
 from flair.data import Sentence
 from heapq import nsmallest
 import pandas as pd
-
-from app.server.Model.request_model import Song
-from app.server.SongProcessor.processor import SongProcessor
+try:
+    from app.server.Model.request_model import Song
+    from app.server.SongProcessor.processor import SongProcessor
+except:
+    from server.Model.request_model import Song
+    from server.SongProcessor.processor import SongProcessor
 
 class FlairSentimentAnalyzer(SongProcessor):
 
@@ -64,14 +67,23 @@ class FlairSentimentAnalyzer(SongProcessor):
     def process_data(self) -> None:
         pos_song_list = List[dict]
         neg_song_list = List[dict]
-        with open('app\server\SongProcessor\\2000songs_positive_df.pkl', 'rb') as f:
-            pos_song_list = pickle.load(f)
+        try:
+            with open('app\server\SongProcessor\\2000songs_negative_df.pkl', 'rb') as f:
+                neg_song_list = pickle.load(f)
+            with open('app\server\SongProcessor\\2000songs_positive_df.pkl', 'rb') as f:
+                pos_song_list = pickle.load(f)
+        except:
+             with open('server\SongProcessor\\2000songs_negative_df.pkl', 'rb') as f:
+                neg_song_list = pickle.load(f)
+             with open('server\SongProcessor\\2000songs_positive_df.pkl', 'rb') as f:
+                pos_song_list = pickle.load(f)
+
+       
         self.positive_df = pd.DataFrame.from_records(pos_song_list)
 
         print("positive shape", self.positive_df.shape)
+        
 
-        with open('app\server\SongProcessor\\2000songs_negative_df.pkl', 'rb') as f:
-            neg_song_list = pickle.load(f)
         self.negative_df = pd.DataFrame.from_records(neg_song_list)
         print("negative shape", self.negative_df.shape)
         print('Hooray!!!!! Data processed!')

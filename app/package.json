@@ -15,7 +15,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.4.4",
-    "react-scripts": "5.0.1",
+    "react-scripts": "^2.1.3",
     "request": "^2.88.2",
     "web-vitals": "^2.1.4"
   },
@@ -23,7 +23,7 @@
     "build": "react-scripts build",
     "start": "concurrently \"npm run client\" \"npm run server\"",
     "client": "react-scripts start",
-    "server": "python -m uvicorn RocketBE.main:app --reload",
+    "server": "python -m uvicorn server.main:app --reload",
     "eject": "react-scripts eject",
     "test": "react-scripts test"
   },
