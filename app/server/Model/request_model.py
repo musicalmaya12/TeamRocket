@@ -5,7 +5,6 @@ class Song(BaseModel):
     artiste: str
     title: str
     thumbnail: str
-    link: str
     
 
 class MoodRequest(BaseModel):
