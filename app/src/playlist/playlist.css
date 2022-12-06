@@ -5,11 +5,15 @@
     background: -o-linear-gradient(top left, #045a58 0%, #20ae73 100%);
     background: linear-gradient(to bottom right, #045a58 0%, #20ae73 100%);
         
-    position: absolute;
     width: 100%;
     height: 100%;
-    overflow: hidden;
     text-align: center;
+    padding-bottom: 25px
+}
+
+.playlist-title {
+    margin: 0;
+    padding-top: 25px
 }
 
 .playlist-item {

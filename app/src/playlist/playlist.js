@@ -33,7 +33,6 @@ export default function Playlist() {
         console.log("Error: " + error);
       });
   }, []);
-  console.log(tracks);
 
   const getUrls = (name) => {
     const trackInfo = tracks.filter((track) =>
@@ -50,8 +49,8 @@ export default function Playlist() {
 
   return (
     <div className="playlist-container">
-      <h1>{`${
-        playlistMood[0].toUpperCase() + playlistMood.substring(1)
+      <h1 className="playlist-title">{`${
+        playlistMood[0].toUpperCase() + playlistMood.substring(1).toLowerCase()
       } Playlist`}</h1>
       {playlistData.map((songInfo) => (
         <List className="playlist-item" key={songInfo.title}>
@@ -64,7 +63,7 @@ export default function Playlist() {
                 <Tooltip title="Listen at Spotify" placement="right-start">
                   <a
                     className="song-title-link"
-                    href={getUrls(songInfo.title).spotifyUrl}
+                    href={getUrls(songInfo.title.split(" by")[0]).spotifyUrl}
                   >
                     {songInfo.title.split(" by")[0]}
                   </a>
