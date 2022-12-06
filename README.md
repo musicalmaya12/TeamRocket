@@ -2,7 +2,7 @@
 
 To install:
 1. `cd app`
-2.  `pip install -r requirement.txt` 
+2.  `pip install -r requirements.txt` 
 3. `npm install`
 
 To run the application:
