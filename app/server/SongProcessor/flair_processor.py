@@ -6,8 +6,8 @@ from flair.data import Sentence
 from heapq import nsmallest
 import pandas as pd
 
-from app.RocketBE.Model.request_model import Song
-from app.RocketBE.SongProcessor.processor import SongProcessor
+from app.server.Model.request_model import Song
+from app.server.SongProcessor.processor import SongProcessor
 
 class FlairSentimentAnalyzer(SongProcessor):
 
