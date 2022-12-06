@@ -23,7 +23,7 @@ class FlairSentimentAnalyzer(SongProcessor):
         phraseSentiment = Sentence(user_mood)
         self.textClassifier.predict(phraseSentiment)
         mySentiment = phraseSentiment.labels[0]
-        songScore = phraseSentiment.score
+        phraseScore = phraseSentiment.score
         print(mySentiment)
 
         ten_song_list = []
@@ -31,7 +31,7 @@ class FlairSentimentAnalyzer(SongProcessor):
         # matches user input based on Positive or Negative sentiment to ten songs closest to its sentiment score
         if "POSITIVE" in str(mySentiment):
             # matching function
-            closest_ten_pos = nsmallest(10, self.positive_df['score'], key=lambda x: abs(x - songScore))
+            closest_ten_pos = nsmallest(10, self.positive_df['score'], key=lambda x: abs(x - phraseScore))
             for value in closest_ten_pos:
                 ten_song_list.append({
                     "artiste": str(self.positive_df.loc[self.positive_df['score'].eq(value), 'artiste'].iloc[0]).strip(),
@@ -41,7 +41,7 @@ class FlairSentimentAnalyzer(SongProcessor):
             print(ten_song_list)
         elif "NEGATIVE" in str(mySentiment):
             # matching function
-            closest_ten_neg = nsmallest(10, self.negative_df['score'], key=lambda x: abs(x - songScore))
+            closest_ten_neg = nsmallest(10, self.negative_df['score'], key=lambda x: abs(x - phraseScore))
             for value in closest_ten_neg:
                 ten_song_list.append({
                     "artiste": str(self.negative_df.loc[self.negative_df['score'].eq(value), 'artiste'].iloc[0]).strip(),

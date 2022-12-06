@@ -27,14 +27,14 @@ def playlist_getter(positive_df, negative_df):
     phraseSentiment = Sentence('I am feeling excited for the end of the semester!')
     textClassifier.predict(phraseSentiment)
     mySentiment = phraseSentiment.labels[0]
-    songScore = phraseSentiment.score
+    phraseScore = phraseSentiment.score
     print(mySentiment)
 
     ten_song_list = []
 
     if "POSITIVE" in str(mySentiment):
         # matching function
-        closest_ten_pos = nsmallest(10, positive_df['score'], key=lambda x: abs(x - songScore))
+        closest_ten_pos = nsmallest(10, positive_df['score'], key=lambda x: abs(x - phraseScore))
         for value in closest_ten_pos:
             ten_song_list.append({
                 "artiste": str(positive_df.loc[positive_df['score'].eq(value), 'artiste'].iloc[0]).strip(),
@@ -44,7 +44,7 @@ def playlist_getter(positive_df, negative_df):
         print(ten_song_list)
     elif "NEGATIVE" in str(mySentiment):
         # matching function
-        closest_ten_neg = nsmallest(10, negative_df['score'], key=lambda x: abs(x - songScore))
+        closest_ten_neg = nsmallest(10, negative_df['score'], key=lambda x: abs(x - phraseScore))
         for value in closest_ten_neg:
             ten_song_list.append({
                 "artiste": str(negative_df.loc[negative_df['score'].eq(value), 'artiste'].iloc[0]).strip(),
