@@ -77,6 +77,7 @@ class FlairSentimentAnalyzer(SongProcessor):
         self.positive_df = pd.DataFrame.from_records(pos_song_list)
         self.negative_df = pd.DataFrame.from_records(neg_song_list)
         print('Hooray!!!!! Data processed!')
+    
     @classmethod
     def get_song_field(self, df: pd.DataFrame, score: float, col: str) -> str:
         return str(df.loc[df['score'].eq(score), col].iloc[0])
