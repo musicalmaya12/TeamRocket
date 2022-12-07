@@ -113,7 +113,7 @@ export default function Playlist() {
       </div>
       <h1 className="playlist-title">
         <span>
-          {`${playlistMood.toString().split(' ')[0][0].toUpperCase() + playlistMood.toString().split(' ')[0].substring(1).toLowerCase()  + ' Playlist'
+          {`${playlistMood.toString().split(' ')[0][0].toUpperCase() + playlistMood.toString().split(' ')[0].substring(1).toLowerCase() + ' Playlist'
             }`}
         </span>
         <Feedback regeneratePlaylist={regeneratePlaylist} />

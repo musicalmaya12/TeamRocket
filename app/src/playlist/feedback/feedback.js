@@ -10,16 +10,10 @@ export default function Feedback({ regeneratePlaylist }) {
     const [feedback, setFeedback] = useState(null);
 
     const handleClick = (newFeedback) => {
-        // If the same icon is clicked twice, set the feedback to null.
-        // Else, set to new feedback. 
-        if (feedback === newFeedback) {
-            setFeedback(null);
-        } else {
-            setFeedback(newFeedback);
+        setFeedback(newFeedback);
 
-            if (regeneratePlaylist) {
-                regeneratePlaylist(newFeedback);
-            }       
+        if (regeneratePlaylist) {
+            regeneratePlaylist(newFeedback);
         }
     }
 
@@ -37,7 +31,7 @@ export default function Feedback({ regeneratePlaylist }) {
             </Tooltip>
             <Tooltip title="Doesn't match">
                 <ThumbDownOffAltIcon
-                    sx={{ color: feedbackMatches(BAD) ? "#ff7373" : "rgb(255 255 255 / 80%)", "&:hover": { color: "#ff7373", cursor: "pointer" } }}
+                    sx={{ color: feedbackMatches(BAD) ? "#ff7373" : "rgb(255 255 255 / 80%)", "&:hover": { color: "#ff2800", cursor: "pointer" } }}
                     onClick={() => handleClick(BAD)}
                 />
             </Tooltip>
