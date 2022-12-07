@@ -11,6 +11,12 @@
     padding-bottom: 25px
 }
 
+#back-button {
+    position: absolute;
+    left: 5%;
+    top: 3%;
+}
+
 .playlist-title {
     margin: 0;
     padding-top: 25px

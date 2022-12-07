@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { getTracksFromSpotify } from "../services/spotify";
 
 import "./playlist.css";
@@ -11,19 +11,21 @@ import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import Tooltip from "@mui/material/Tooltip";
+import Button from "@mui/material/Button";
 
 export default function Playlist() {
   const { state } = useLocation();
   const playlistData = state.playlistData.playlist || [];
   const playlistMood = state.message || "";
   const [tracks, setTracks] = useState([]);
-
-  const fetchPlaylistTracks = playlistData.map(async (songInfo) => {
-    const result = await getTracksFromSpotify(songInfo.title);
-    return result.tracks;
-  });
+  let navigate = useNavigate();
 
   useEffect(() => {
+    const fetchPlaylistTracks = playlistData.map(async (songInfo) => {
+      const result = await getTracksFromSpotify(songInfo.title);
+      return result.tracks;
+    });
+
     Promise.all(fetchPlaylistTracks)
       .then((results) => {
         setTracks(results);
@@ -49,9 +51,20 @@ export default function Playlist() {
 
   return (
     <div className="playlist-container">
+      <Tooltip title="Search Mood Again" placement="bottom">
+        <Button
+          variant="contained"
+          size="small"
+          id="back-button"
+          onClick={() => navigate("/")}
+        >
+          Back
+        </Button>
+      </Tooltip>
       <h1 className="playlist-title">{`${
         playlistMood[0].toUpperCase() + playlistMood.substring(1).toLowerCase()
       } Playlist`}</h1>
+
       {playlistData.map((songInfo) => (
         <List className="playlist-item" key={songInfo.title}>
           <ListItem>
@@ -64,6 +77,8 @@ export default function Playlist() {
                   <a
                     className="song-title-link"
                     href={getUrls(songInfo.title.split(" by")[0]).spotifyUrl}
+                    target="_blank"
+                    rel="noreferrer"
                   >
                     {songInfo.title.split(" by")[0]}
                   </a>
