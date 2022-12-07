@@ -53,26 +53,26 @@ export default function Playlist() {
   return (
     <div className={playlistSentiment[0] === 'positive' ?
       (parseFloat(playlistSentiment[1]) > 0.99 ?
-        "playlist-container-super-positive" :
+        "playlist-container-1" :
         parseFloat(playlistSentiment[1]) > 0.97 && parseFloat(playlistSentiment[1]) < 0.99 ?
-          "playlist-container" :
+          "playlist-container-2" :
           parseFloat(playlistSentiment[1]) > 0.90 && parseFloat(playlistSentiment[1]) < 0.97 ?
-            "playlist-container" :
+            "playlist-container-3" :
             parseFloat(playlistSentiment[1]) > 0.80 && parseFloat(playlistSentiment[1]) < 0.90 ?
-              "playlist-container" :
+              "playlist-container-4" :
               parseFloat(playlistSentiment[1]) < 0.80 ?
-                "playlist-container" : "playlist-container") :
+                "playlist-container-5" : "playlist-container-1") :
       (parseFloat(playlistSentiment[1]) > 0.99 ?
-        "playlist-container" :
+        "negative-container-1" :
         parseFloat(playlistSentiment[1]) > 0.97 && parseFloat(playlistSentiment[1]) < 0.99 ?
-          "playlist-container" :
+          "negative-container-2" :
           parseFloat(playlistSentiment[1]) > 0.90 && parseFloat(playlistSentiment[1]) < 0.97 ?
-            "playlist-container" :
+            "negative-container-3" :
             parseFloat(playlistSentiment[1]) > 0.80 && parseFloat(playlistSentiment[1]) < 0.90 ?
-              "playlist-container" :
+              "negative-container-4" :
               parseFloat(playlistSentiment[1]) < 0.80 ?
-                "playlist-container" : "playlist-container")}>
-      <Tooltip title="Search Mood Again" placement="bottom">
+                "negative-container-5" : "negative-container-1")}>
+      <Tooltip title="Change your Mood" placement="bottom">
         <Button
           variant="contained"
           size="small"
@@ -126,7 +126,7 @@ export default function Playlist() {
                 </Tooltip>
               }
               secondary={
-                <Typography component="span" variant="body2" color="#D3D3D3">
+                <Typography component="span" variant="body2" color="#ffffff">
                   {songInfo.artiste}
                 </Typography>
               }

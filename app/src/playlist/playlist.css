@@ -1,9 +1,9 @@
-.playlist-container {
-    background: #50a3a2;
-    background: -webkit-linear-gradient(top left, #045a58 0%, #00872c 100%);
-    background: -moz-linear-gradient(top left, #045a58 0%, #20ae73 100%);
-    background: -o-linear-gradient(top left, #045a58 0%, #20ae73 100%);
-    background: linear-gradient(to bottom right, #045a58 0%, #20ae73 100%);
+.playlist-container-1 {
+    background: #409f9e;
+    background: -webkit-linear-gradient(top left, #068785 0%, #03b43e 100%);
+    background: -moz-linear-gradient(top left, #068785 0%, #1ebf7c 100%);
+    background: -o-linear-gradient(top left, #068785 0%, #1ebf7c 100%);
+    background: linear-gradient(to bottom right, #068785 0%, #1ebf7c 100%);
         
     width: 100%;
     height: 100%;
@@ -11,12 +11,116 @@
     padding-bottom: 25px
 }
 
-.playlist-container-super-positive {
+.playlist-container-2 {
+    background: #3e8988;
+    background: -webkit-linear-gradient(top left, #087d7b 0%, #03a639 100%);
+    background: -moz-linear-gradient(top left, #087d7b 0%, #25bc7d 100%);
+    background: -o-linear-gradient(top left, #087d7b 0%, #25bc7d 100%);
+    background: linear-gradient(to bottom right, #087d7b 0%, #25bc7d 100%);
+        
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    padding-bottom: 25px
+}
+
+.playlist-container-3 {
+    background: #50a3a2;
+    background: -webkit-linear-gradient(top left, #066f6d 0%, #00872c 100%);
+    background: -moz-linear-gradient(top left, #066f6d 0%, #20ae73 100%);
+    background: -o-linear-gradient(top left, #066f6d 0%, #20ae73 100%);
+    background: linear-gradient(to bottom right, #066f6d 0%, #20ae73 100%);
+        
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    padding-bottom: 25px
+}
+
+.playlist-container-4 {
+    background: #275756;
+    background: -webkit-linear-gradient(top left, #055251 0%, #016a24 100%);
+    background: -moz-linear-gradient(top left, #055251 0%, #146d48 100%);
+    background: -o-linear-gradient(top left, #055251 0%, #146d48 100%);
+    background: linear-gradient(to bottom right, #055251 0%, #146d48 100%);
+        
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    padding-bottom: 25px
+}
+
+.playlist-container-5 {
     background: #285857;
     background: -webkit-linear-gradient(top left, #034140 0%, #016623 100%);
-    background: -moz-linear-gradient(top left, #033a39 0%, #17784f 100%);
-    background: -o-linear-gradient(top left, #033d3c 0%, #136542 100%);
-    background: linear-gradient(to bottom right, #023837 0%, #146d48 100%);
+    background: -moz-linear-gradient(top left, #034140 0%, #135d3e 100%);
+    background: -o-linear-gradient(top left, #034140 0%, #135d3e 100%);
+    background: linear-gradient(to bottom right, #034140 0%, #135d3e 100%);
+        
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    padding-bottom: 25px
+}
+
+.negative-container-1 {
+    background: #9b053c;
+    background: -webkit-linear-gradient(top left, #680328 0%, #2c03b4 100%);
+    background: -moz-linear-gradient(top left, #680328 0%, #2c03b4 100%);
+    background: -o-linear-gradient(top left, #680328 0%, #2c03b4 100%);
+    background: linear-gradient(to bottom right, #680328 0%, #2c03b4 100%);
+        
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    padding-bottom: 25px
+}
+
+.negative-container-2 {
+    background: #b60647;
+    background: -webkit-linear-gradient(top left, #95053a 0%, #3403d6 100%);
+    background: -moz-linear-gradient(top left, #95053a 0%, #3403d6 100%);
+    background: -o-linear-gradient(top left, #95053a 0%, #3403d6 100%);
+    background: linear-gradient(to bottom right, #95053a 0%, #3403d6 100%);
+        
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    padding-bottom: 25px
+}
+
+.negative-container-3 {
+    background: #cf0951;
+    background: -webkit-linear-gradient(top left, #b10745 0%, #4310ec 100%);
+    background: -moz-linear-gradient(top left, #b10745 0%, #4310ec 100%);
+    background: -o-linear-gradient(top left, #b10745 0%, #4310ec 100%);
+    background: linear-gradient(to bottom right, #b10745 0%, #4310ec 100%);
+        
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    padding-bottom: 25px
+}
+
+.negative-container-4 {
+    background: #e81361;
+    background: -webkit-linear-gradient(top left, #d01157 0%, #5326e8 100%);
+    background: -moz-linear-gradient(top left, #d01157 0%, #5326e8 100%);
+    background: -o-linear-gradient(top left, #d01157 0%, #5326e8 100%);
+    background: linear-gradient(to bottom right, #d01157 0%, #5326e8 100%);
+        
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    padding-bottom: 25px
+}
+
+.negative-container-5 {
+    background: #f7206f;
+    background: -webkit-linear-gradient(top left, #e32a6e 0%, #653ee6 100%);
+    background: -moz-linear-gradient(top left, #e32a6e 0%, #653ee6 100%);
+    background: -o-linear-gradient(top left, #e32a6e 0%, #653ee6 100%);
+    background: linear-gradient(to bottom right, #e32a6e 0%, #653ee6 100%);
         
     width: 100%;
     height: 100%;
