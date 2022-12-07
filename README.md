@@ -1,19 +1,21 @@
 # The Mood Playlist Generator
 
-To install:
+#### How to use the application:
+
+To run the app, follow these steps (one time installation):
 1. `cd app`
 2.  `pip install -r requirements.txt` 
 3. `npm install`
 
-To run the application:
+Next, run the application:
 1. `cd app`
 2. `npm start`
 
-#### Backend Initiatization
+#### Backend Initiatization - to use the API (on FastAPI)
 1. `cd app`
-2. install stuff `pip install -r requirements.txt`
+2. Install stuff: `pip install -r requirements.txt`
 3. Run `uvicorn app.server.main:app --reload`
-4. go to `http://127.0.0.1:8000/docs`
+4. Go to `http://127.0.0.1:8000/docs`
 
 `POST: URL http://127.0.0.1:8000/get_mood_songs`
 
@@ -27,8 +29,7 @@ Sample Request/Body
 Sample Response
 ```
 {
-  "sentiment": "excited",
-  "score": 0.99,
+  "sentiment": "positive, 0.99",
   "playlist": [
     {
       "artiste": " One Direction ",
@@ -93,3 +94,4 @@ Sample Response
   ]
 }
 ```
+#### How the application is implemented:
