@@ -1,4 +1,5 @@
 import './main.css';
+import React from 'react';
 import Input from '../input/input';
 
 export default function Main() {
