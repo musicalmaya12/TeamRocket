@@ -56,7 +56,12 @@ export default function Playlist() {
 
   const regeneratePlaylist = (feedback) => {
     if (feedback === 'bad') {
-      generatePlaylist(navigate, playlistMood + ' positive');
+      if (playlistSentiment[0] === 'positive') {
+        generatePlaylist(navigate, playlistMood + ' positive');
+      }
+      else {
+        generatePlaylist(navigate, playlistMood + ' negative');
+      }
       setRegenerated(true);
     }
     else {
