@@ -29,31 +29,22 @@ class FlairSentimentAnalyzer(SongProcessor):
         self.textClassifier.predict(phraseSentiment)
         mySentiment = phraseSentiment.labels[0]
         phraseScore = phraseSentiment.score
-        print(phraseSentiment)
         print(mySentiment)
 
         ten_song_list = []
-        mood = "positive"
+        mood = f'positive, {phraseScore}'
         # matches user input based on Positive or Negative sentiment to ten songs closest to its sentiment score
         if "POSITIVE" in str(mySentiment):
             # matching function
             closest_ten_pos = nsmallest(10, self.positive_df['score'], key=lambda x: abs(x - phraseScore))
-            '''
-            {
-                    "artiste": str(self.positive_df.loc[self.positive_df['score'].eq(value), 'artiste'].iloc[0]).strip(),
-                    "title": str(self.positive_df.loc[self.positive_df['score'].eq(value), 'title'].iloc[0]).strip().replace('\xa0', ' '),
-                    "thumbnail": str(self.positive_df.loc[self.positive_df['score'].eq(value), 'thumbnail'].iloc[0]).strip(),
-                }
-            '''
             for value in closest_ten_pos:
                 ten_song_list.append(Song(
                     artiste=FlairSentimentAnalyzer.get_song_field(self.positive_df, value,"artiste").strip(),
                     title =  FlairSentimentAnalyzer.get_song_field(self.positive_df, value,'title').strip().replace('\xa0', ' '),
                     thumbnail = FlairSentimentAnalyzer.get_song_field(self.positive_df, value, 'thumbnail').strip(),
                 ))
-            print(ten_song_list)
         elif "NEGATIVE" in str(mySentiment):
-            mood = "negative"
+            mood = f'negative, {phraseScore}'
             # matching function
             closest_ten_neg = nsmallest(10, self.negative_df['score'], key=lambda x: abs(x - phraseScore))
             for value in closest_ten_neg:
