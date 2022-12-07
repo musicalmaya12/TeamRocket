@@ -11,6 +11,19 @@
     padding-bottom: 25px
 }
 
+.playlist-container-super-positive {
+    background: #285857;
+    background: -webkit-linear-gradient(top left, #034140 0%, #016623 100%);
+    background: -moz-linear-gradient(top left, #033a39 0%, #17784f 100%);
+    background: -o-linear-gradient(top left, #033d3c 0%, #136542 100%);
+    background: linear-gradient(to bottom right, #023837 0%, #146d48 100%);
+        
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    padding-bottom: 25px
+}
+
 #back-button {
     position: absolute;
     left: 5%;

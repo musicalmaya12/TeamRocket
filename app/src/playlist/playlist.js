@@ -51,7 +51,27 @@ export default function Playlist() {
   };
 
   return (
-    <div className="playlist-container">
+    <div className={playlistSentiment[0] === 'positive' ?
+      (parseFloat(playlistSentiment[1]) > 0.99 ?
+        "playlist-container-super-positive" :
+        parseFloat(playlistSentiment[1]) > 0.97 && parseFloat(playlistSentiment[1]) < 0.99 ?
+          "playlist-container" :
+          parseFloat(playlistSentiment[1]) > 0.90 && parseFloat(playlistSentiment[1]) < 0.97 ?
+            "playlist-container" :
+            parseFloat(playlistSentiment[1]) > 0.80 && parseFloat(playlistSentiment[1]) < 0.90 ?
+              "playlist-container" :
+              parseFloat(playlistSentiment[1]) < 0.80 ?
+                "playlist-container" : "playlist-container") :
+      (parseFloat(playlistSentiment[1]) > 0.99 ?
+        "playlist-container" :
+        parseFloat(playlistSentiment[1]) > 0.97 && parseFloat(playlistSentiment[1]) < 0.99 ?
+          "playlist-container" :
+          parseFloat(playlistSentiment[1]) > 0.90 && parseFloat(playlistSentiment[1]) < 0.97 ?
+            "playlist-container" :
+            parseFloat(playlistSentiment[1]) > 0.80 && parseFloat(playlistSentiment[1]) < 0.90 ?
+              "playlist-container" :
+              parseFloat(playlistSentiment[1]) < 0.80 ?
+                "playlist-container" : "playlist-container")}>
       <Tooltip title="Search Mood Again" placement="bottom">
         <Button
           variant="contained"
@@ -68,7 +88,7 @@ export default function Playlist() {
         (parseFloat(playlistSentiment[1]) > 0.99 ?
           <h3 className="playlist-title">{`Sounds like you're feeling amazing today!`}</h3> :
           parseFloat(playlistSentiment[1]) > 0.97 && parseFloat(playlistSentiment[1]) < 0.99 ?
-            <h3 className="playlist-title">{`Sounds like you're feeling great today!`}</h3> :
+            <h3 className="playlist-title">{`Sounds like you're feeling grand today!`}</h3> :
             parseFloat(playlistSentiment[1]) > 0.90 && parseFloat(playlistSentiment[1]) < 0.97 ?
               <h3 className="playlist-title">{`Sounds like you're feeling good today!`}</h3> :
               parseFloat(playlistSentiment[1]) > 0.80 && parseFloat(playlistSentiment[1]) < 0.90 ?
@@ -78,7 +98,7 @@ export default function Playlist() {
         : (parseFloat(playlistSentiment[1]) > 0.99 ?
           <h3 className="playlist-title">{`Sounds like you're not feeling amazing today. We hope you feel better soon!`}</h3> :
           parseFloat(playlistSentiment[1]) > 0.97 && parseFloat(playlistSentiment[1]) < 0.99 ?
-            <h3 className="playlist-title">{`Sounds like you're not feeling great today. We hope you feel better soon!`}</h3> :
+            <h3 className="playlist-title">{`Sounds like you're not feeling grand today. We hope you feel better soon!`}</h3> :
             parseFloat(playlistSentiment[1]) > 0.90 && parseFloat(playlistSentiment[1]) < 0.97 ?
               <h3 className="playlist-title">{`Sounds like you're not feeling good today. We hope you feel better soon!`}</h3> :
               parseFloat(playlistSentiment[1]) > 0.80 && parseFloat(playlistSentiment[1]) < 0.90 ?
@@ -99,7 +119,7 @@ export default function Playlist() {
                     className="song-title-link"
                     href={getUrls(songInfo.title.split(" by")[0]).spotifyUrl}
                     target="_blank"
-                    rel="noreferrer"
+                    rel="noopener noreferrer"
                   >
                     {songInfo.title.split(" by")[0]}
                   </a>
