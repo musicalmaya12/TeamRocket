@@ -1,5 +1,7 @@
 # The Mood Playlist Generator
 
+#### How to use the application:
+
 To run the app, follow these steps (one time installation):
 1. `cd app`
 2.  `pip install -r requirements.txt` 
@@ -92,3 +94,4 @@ Sample Response
   ]
 }
 ```
+#### How the application is implemented:
