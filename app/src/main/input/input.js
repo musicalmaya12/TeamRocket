@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import './input.css';
-import { getMoodPlaylist } from '../services/generator';
+import { getMoodPlaylist } from '../../services/generator';
 
 export default function Input({ hintText }) {
     const [message, setMessage] = useState('');
@@ -18,12 +18,7 @@ export default function Input({ hintText }) {
             return;
         }
 
-        getMoodPlaylist(message)
-            .then((playlistData) => {
-                // This should work and log the random playlist 
-                console.log(playlistData);
-                navigate("/playlist", { state: {playlistData, message} });
-            });
+        generatePlaylist(navigate, message);
     }
 
     return (
@@ -49,4 +44,11 @@ export default function Input({ hintText }) {
 
 const isStringEmpty = (str) => {
     return str.trim().length === 0;
+}
+
+export const generatePlaylist = (navigate, message) => {
+    getMoodPlaylist(message)
+        .then((playlistData) => {
+            navigate("/playlist", { state: { playlistData, message } });
+        });
 }

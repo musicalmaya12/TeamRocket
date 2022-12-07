@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getTracksFromSpotify } from "../services/spotify";
+import { generatePlaylist } from "../main/input/input";
 
 import "./playlist.css";
 import List from "@mui/material/List";
@@ -12,6 +13,7 @@ import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import Tooltip from "@mui/material/Tooltip";
 import Button from "@mui/material/Button";
+import Feedback from "./feedback/feedback";
 
 export default function Playlist() {
   const { state } = useLocation();
@@ -37,6 +39,7 @@ export default function Playlist() {
       });
   }, []);
 
+
   const getUrls = (name) => {
     const trackInfo = tracks.filter((track) =>
       decodeURIComponent(track.href).includes(name.split(" ").join("+"))
@@ -49,6 +52,12 @@ export default function Playlist() {
     const previewUrl = songInfo && songInfo.preview_url;
     return { spotifyUrl, previewUrl };
   };
+
+  const regeneratePlaylist = (feedback) => {
+    if (feedback === 'bad') {
+      generatePlaylist(navigate, playlistMood);
+    }
+  }
 
   return (
     <div className={playlistSentiment[0] === 'positive' ?
@@ -72,18 +81,38 @@ export default function Playlist() {
               "negative-container-4" :
               parseFloat(playlistSentiment[1]) < 0.80 ?
                 "negative-container-5" : "negative-container-1")}>
-      <Tooltip title="Change your Mood" placement="bottom">
-        <Button
-          variant="contained"
-          size="small"
-          id="back-button"
-          onClick={() => navigate("/")}
-        >
-          Back
-        </Button>
-      </Tooltip>
-      <h1 className="playlist-title">{`${playlistMood[0].toUpperCase() + playlistMood.substring(1).toLowerCase()
-        } Playlist`}</h1>
+
+      <div className="nav">
+        <Tooltip title="Change your Mood" placement="bottom">
+          <Button
+            variant="contained"
+            size="small"
+            id="back-button"
+            sx={{ backgroundColor: "rgb(0 0 0 / 20%) !important" }}
+            onClick={() => navigate("/")}
+          >
+            Back
+          </Button>
+        </Tooltip>
+        <Tooltip title="Current Statistics" placement="bottom">
+          <Button
+            variant="contained"
+            size="small"
+            id="stats-button"
+            sx={{ backgroundColor: "rgb(0 0 0 / 20%) !important" }}
+            onClick={() => navigate("/stats")}
+          >
+            Stats
+          </Button>
+        </Tooltip>
+      </div>
+      <h1 className="playlist-title">
+        <span>
+          {`"${playlistMood[0].toUpperCase() + playlistMood.substring(1).toLowerCase()
+            }"`}
+        </span> Playlist
+        <Feedback regeneratePlaylist={regeneratePlaylist} />
+      </h1>
       {playlistSentiment[0] === 'positive' ?
         (parseFloat(playlistSentiment[1]) > 0.99 ?
           <h3 className="playlist-title">{`Sounds like you're feeling amazing today!`}</h3> :
@@ -106,6 +135,7 @@ export default function Playlist() {
                 parseFloat(playlistSentiment[1]) < 0.80 ?
                   <h3 className="playlist-title">{`Sounds like you're just okay today. We hope you feel better soon!`}</h3> : null)}
       <h3 className="playlist-title">Here is a playlist that matches your mood:</h3>
+
       {playlistData.map((songInfo) => (
         <List className="playlist-item" key={songInfo.title}>
           <ListItem>
@@ -131,6 +161,7 @@ export default function Playlist() {
                 </Typography>
               }
             />
+            <Feedback />
           </ListItem>
           <Divider variant="inset" component="li" />
         </List>

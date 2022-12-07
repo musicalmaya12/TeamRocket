@@ -7,6 +7,7 @@ import {
 import './index.css';
 import Main from './main/main';
 import Playlist from './playlist/playlist';
+import Stats from './stats/stats';
 import reportWebVitals from './reportWebVitals';
 
 const router = createBrowserRouter([
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
   {
     path: "/playlist",
     element: <Playlist />,
+  },
+  {
+    path: "/stats",
+    element: <Stats />
   }
 ]);
 
