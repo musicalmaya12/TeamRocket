@@ -17,6 +17,7 @@ export default function Playlist() {
   const { state } = useLocation();
   const playlistData = state.playlistData.playlist || [];
   const playlistMood = state.message || "";
+  const playlistSentiment = state.playlistData.sentiment.toString().split(",").map(function (item) { return item.trim() }) || [];
   const [tracks, setTracks] = useState([]);
   let navigate = useNavigate();
 
@@ -61,10 +62,30 @@ export default function Playlist() {
           Back
         </Button>
       </Tooltip>
-      <h1 className="playlist-title">{`${
-        playlistMood[0].toUpperCase() + playlistMood.substring(1).toLowerCase()
-      } Playlist`}</h1>
-
+      <h1 className="playlist-title">{`${playlistMood[0].toUpperCase() + playlistMood.substring(1).toLowerCase()
+        } Playlist`}</h1>
+      {playlistSentiment[0] === 'positive' ?
+        (parseFloat(playlistSentiment[1]) > 0.99 ?
+          <h3 className="playlist-title">{`Sounds like you're feeling amazing today!`}</h3> :
+          parseFloat(playlistSentiment[1]) > 0.97 && parseFloat(playlistSentiment[1]) < 0.99 ?
+            <h3 className="playlist-title">{`Sounds like you're feeling great today!`}</h3> :
+            parseFloat(playlistSentiment[1]) > 0.90 && parseFloat(playlistSentiment[1]) < 0.97 ?
+              <h3 className="playlist-title">{`Sounds like you're feeling good today!`}</h3> :
+              parseFloat(playlistSentiment[1]) > 0.80 && parseFloat(playlistSentiment[1]) < 0.90 ?
+                <h3 className="playlist-title">{`Sounds like you're feeling fine today!`}</h3> :
+                parseFloat(playlistSentiment[1]) < 0.80 ?
+                  <h3 className="playlist-title">{`Sounds like you're feeling okay today!`}</h3> : null)
+        : (parseFloat(playlistSentiment[1]) > 0.99 ?
+          <h3 className="playlist-title">{`Sounds like you're not feeling amazing today. We hope you feel better soon!`}</h3> :
+          parseFloat(playlistSentiment[1]) > 0.97 && parseFloat(playlistSentiment[1]) < 0.99 ?
+            <h3 className="playlist-title">{`Sounds like you're not feeling great today. We hope you feel better soon!`}</h3> :
+            parseFloat(playlistSentiment[1]) > 0.90 && parseFloat(playlistSentiment[1]) < 0.97 ?
+              <h3 className="playlist-title">{`Sounds like you're not feeling good today. We hope you feel better soon!`}</h3> :
+              parseFloat(playlistSentiment[1]) > 0.80 && parseFloat(playlistSentiment[1]) < 0.90 ?
+                <h3 className="playlist-title">{`Sounds like you're not feeling fine today. We hope you feel better soon!`}</h3> :
+                parseFloat(playlistSentiment[1]) < 0.80 ?
+                  <h3 className="playlist-title">{`Sounds like you're just okay today. We hope you feel better soon!`}</h3> : null)}
+      <h3 className="playlist-title">Here is a playlist that matches your mood:</h3>
       {playlistData.map((songInfo) => (
         <List className="playlist-item" key={songInfo.title}>
           <ListItem>
