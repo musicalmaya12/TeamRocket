@@ -27,8 +27,7 @@ Sample Request/Body
 Sample Response
 ```
 {
-  "sentiment": "excited",
-  "score": 0.99,
+  "sentiment": "positive, 0.99",
   "playlist": [
     {
       "artiste": " One Direction ",
