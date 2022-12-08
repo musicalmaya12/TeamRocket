@@ -3,6 +3,7 @@
 ### How to use the application:
 
 Clone this repository to your local machine.
+If you do not have Python 3.6, install that first.
 
 To run the app, follow these steps (one time installation):
 1. `cd app`
