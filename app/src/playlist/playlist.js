@@ -14,6 +14,7 @@ import Typography from "@mui/material/Typography";
 import Tooltip from "@mui/material/Tooltip";
 import Button from "@mui/material/Button";
 import Feedback from "./feedback/feedback";
+import { MORE_POSITIVE, MORE_NEGATIVE } from "../services/constants";
 
 export default function Playlist() {
   const { state } = useLocation();
@@ -60,11 +61,11 @@ export default function Playlist() {
   };
 
   const regeneratePlaylist = (feedback) => {
-    if (feedback === 'bad') {
+    if (feedback === MORE_POSITIVE) {
       if (playlistSentiment[0] === 'positive') {
         generatePlaylist(navigate, playlistMood + ' positive');
       }
-      else {
+      else if (feedback === MORE_NEGATIVE) {
         generatePlaylist(navigate, playlistMood + ' negative');
       }
       setRegenerated(true);
@@ -103,7 +104,7 @@ export default function Playlist() {
             variant="contained"
             size="small"
             id="back-button"
-            sx={{ backgroundColor: "rgb(0 0 0 / 20%) !important" }}
+            sx={{ backgroundColor: "rgb(0 0 0 / 20%) !important", "&:hover": { backgroundColor: "rgb(0 0 0 / 50%) !important" } }}
             onClick={() => navigate("/")}
           >
             Back
@@ -114,7 +115,7 @@ export default function Playlist() {
             variant="contained"
             size="small"
             id="stats-button"
-            sx={{ backgroundColor: "rgb(0 0 0 / 20%) !important" }}
+            sx={{ backgroundColor: "rgb(0 0 0 / 20%) !important", "&:hover": { backgroundColor: "rgb(0 0 0 / 50%) !important" } }}
             onClick={() => navigate("/stats")}
           >
             Stats

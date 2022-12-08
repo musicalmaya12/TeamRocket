@@ -26,10 +26,10 @@
   "scripts": {
     "build": "react-scripts build",
     "start": "concurrently \"npm run client\" \"npm run server\"",
-    "start:py37": "concurrently \"npm run client\" \"npm run server:py37\"",
+    "start:py39": "concurrently \"npm run client\" \"npm run server:py39\"",
     "client": "react-scripts start",
     "server": "python -m uvicorn server.main:app --reload",
-    "server:py37": "py -3.7 -m uvicorn server.main:app --reload",
+    "server:py39": "py -3.9 -m uvicorn server.main:app --reload",
     "eject": "react-scripts eject",
     "test": "react-scripts test"
   },

@@ -5,4 +5,4 @@ fastapi
 uvicorn
 pydantic
 tabulate
-pandas
+pandas >= 1.2.0
