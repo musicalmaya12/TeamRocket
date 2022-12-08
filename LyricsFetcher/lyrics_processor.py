@@ -9,13 +9,13 @@ import pandas as pd
 def get_data():
     pos_song_list = List[dict]
     neg_song_list = List[dict]
-    with open('2000songs_positive_df.pkl', 'rb') as f:
+    with open('data/output/2000songs_positive_df.pkl', 'rb') as f:
         pos_song_list = pickle.load(f)
     positive_df = pd.DataFrame.from_records(pos_song_list)
-    with open('2000songs_negative_df.pkl', 'rb') as f:
+    with open('data/output/2000songs_negative_df.pkl', 'rb') as f:
         neg_song_list = pickle.load(f)
     negative_df = pd.DataFrame.from_records(neg_song_list)
-    with open('2000songs.pkl', 'rb') as f:
+    with open('data/output/2000songs.pkl', 'rb') as f:
         song_list = pickle.load(f)
     song_list = pd.DataFrame.from_records(song_list)
     playlist_getter(positive_df, negative_df)

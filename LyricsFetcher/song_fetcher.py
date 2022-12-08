@@ -57,7 +57,7 @@ def main():
             line_count += 1
         print(f'Processed {line_count} lines.')
 
-    with open('songs.pkl', 'wb') as f:
+    with open('data/input/songs.pkl', 'wb') as f:
         pickle.dump(all_songs, f)
 
 if __name__ == '__main__':
