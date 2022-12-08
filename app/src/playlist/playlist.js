@@ -22,6 +22,7 @@ export default function Playlist() {
   const playlistSentiment = state.playlistData.sentiment.toString().split(",").map(function (item) { return item.trim() }) || [];
   const [tracks, setTracks] = useState([]);
   const [regenerated, setRegenerated] = useState(false);
+  const [playlistName, setPlaylistName] = useState('');
   let navigate = useNavigate();
 
   useEffect(() => {
@@ -38,6 +39,10 @@ export default function Playlist() {
       .catch((error) => {
         console.log("Error: " + error);
       });
+
+      // sets playlist name to avoid putting in feedback data in name
+      setPlaylistName(playlistMood.toString()[0].toUpperCase() + playlistMood.toString().substring(1).toLowerCase())
+
   }, []);
 
 
@@ -118,7 +123,7 @@ export default function Playlist() {
       </div>
       <h1 className="playlist-title">
         <span>
-          {`${playlistMood.toString().split(' ')[0][0].toUpperCase() + playlistMood.toString().split(' ')[0].substring(1).toLowerCase() + ' Playlist'
+          {`${playlistName.replace(/positive/g, '').replace(/negative/g, '') +' Playlist'
             }`}
         </span>
         <Feedback regeneratePlaylist={regeneratePlaylist} />
