@@ -103,7 +103,7 @@ We used the Flair sentiment analysis functionality to get the sentiment score fo
 #### Usage of the Spotify API to link our playlist to Spotify:
 
 #### The UI:
-The user interface is implemented using ReactJS. The user inputs a phrase and clicks Submit, which takes them to their personalized mood playlist. The background of their playlist page is customized based on the range of their positive or negative sentiment score. The highest range is > 0.99 (both highly positive or highly negative), which results in the lightest background for the positive range and darkest background for the negative range. The background color gradients proceedingly get darker the less positive the playlist becomes, and lighter the less negative it becomes. We also give users a little message at the top above the playlist tailored to their mood.
+The user interface is implemented using ReactJS. The user inputs a phrase and clicks Submit, which takes them to their personalized mood playlist. The background of their playlist page is customized based on the range of their positive or negative sentiment score. The highest range is > 0.99 (both highly positive or highly negative), which results in the lightest background for the positive range and darkest background for the negative range (both ranges: > 0.99, > 0.97 & < 0.99, > 0.90 & < 0.97, > 0.80 & < 0.90, < 0.80). The background color gradients proceedingly get darker the less positive the playlist becomes, and lighter the less negative it becomes. We also give users a little message at the top above the playlist tailored to their mood.
 
 
 #### Gathering user feedback:
