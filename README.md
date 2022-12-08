@@ -88,6 +88,10 @@ Sample Response
 ```
 ### How the application is implemented:
 
-#### Generating sentiment scores for each song in our database and saving this information for the score matching algorithm
+#### Generating sentiment scores for each song in our database and saving this information for the score matching algorithm:
 
 After our database of 2000 songs was saved locally in a pickle file, we turned the file into a Pandas DataFrame and processed the lyrics for each song using Flair (https://github.com/flairNLP/flair). We created a Text Classifier and ran the lyrics for each song through the predict() function to get its' sentiment ('POSITIVE' or 'NEGATIVE') and the corresponding sentiment score (0 - 1.0). We created two new DataFrames, 'positive_df' and 'negative_df', where we split up the 'POSITIVE' labeled songs vs. the 'NEGATIVE' labeled songs. These two DataFrames contain the columns 'artiste', 'title', 'thumbnail', 'score', and 'label'. Then, we turned these two DataFrames into two new pickle files, '2000songs_negative_df.pkl' and '2000songs_positive_df.pkl', and saved them into our SongProcessor folder under our main app folder.
+
+#### The score matching algorithm:
+
+We used the Flair sentiment analysis functionality to get the sentiment score for our user-inputted phrase, as well. This allows the scores for the user-inputted phrase and the song library to be on the same scale. After getting the sentiment score of the user's phrase, we check if the sentiment is positive or negative. If positive, we compare the user's numerical sentiment score to the song's numerical sentence scores in 2000songs_positive_df and return back the 10 songs with the closest sentiment scores. To calculate this, we use nsmallest from heapq and get the 10 scores with the smallest difference from the user-inputted phrase (hence, the closest scores). We do the same thing with negative songs but use 2000songs_negative_df instead. We then gather all the information for the 10 closest songs and return them in an array along with the sentiment label and score. The data returned is fetched from the API when the user enters a phrase and clicks Submit in the application.
