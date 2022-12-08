@@ -1,8 +1,8 @@
-flair == 0.11
+flair==0.11
 lyricsgenius
 requests
 fastapi
 uvicorn
 pydantic
 tabulate
-pandas >= 1.2.0
+pandas>=1.2.0
