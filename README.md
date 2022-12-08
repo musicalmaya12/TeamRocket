@@ -3,6 +3,7 @@
 ### How to use the application:
 
 Clone this repository to your local machine.
+If you do not have Python 3.6, install that first.
 
 To run the app, follow these steps (one time installation):
 1. `cd app`
@@ -102,12 +103,103 @@ We used the Flair sentiment analysis functionality to get the sentiment score fo
 
 #### Usage of the Spotify API to link our playlist to Spotify:
 
+We used Spotify API to fetch the information of the songs. First we generated a token from Spotify using https://accounts.spotify.com/api/token. Then with the token, we proceeded to obtain details of the songs using "Search for Item" API (https://api.spotify.com/v1/search). To use the Spotify "Search for Item" API (read more: https://developer.spotify.com/documentation/web-api/reference/#/operations/search), we passed 3 parameters to it, **q**, **type** and **limit**. 
+  - **q** (required): it allows filters including *album, artist, track, year, upc, tag:hipster, tag:new, isrc*, and *genre* to filter out irrelevant matches. We used *track* and *artist* to refine the matches.
+  - **type** (required): we used *type: 'track'* to get information about the track.
+  - **limit** (optional): we set *limit: 5* to get the top 5 matches.
+
+The response JSON from Spotify looks like the sample response below. Among the top 5 mathes we recieved from Spotify, we further refined these 5 mathes by finding the exact song title and artist match. Finaly, the link to listen at Spotify was obtained via ```<the_best_match>.external_urls.spotify```. We wrapped the title of the song with the link so users can listen to it at Spotify via clicking the title.
+
+Sample Response: 
+```
+{
+    "tracks": {
+        "href": "https://api.spotify.com/v1/search?query=track%3ACollide+artist%3ARachel+Platten&type=track&locale=en-US%2Cen%3Bq%3D0.9%2Cla%3Bq%3D0.8&offset=0&limit=5",
+        "items": [
+            {
+                "album": {
+                    "album_type": "album",
+                    "artists": [
+                        {
+                            "external_urls": {
+                                "spotify": "https://open.spotify.com/artist/3QLIkT4rD2FMusaqmkepbq"
+                            },
+                            "href": "https://api.spotify.com/v1/artists/3QLIkT4rD2FMusaqmkepbq",
+                            "id": "3QLIkT4rD2FMusaqmkepbq",
+                            "name": "Rachel Platten",
+                            "type": "artist",
+                            "uri": "spotify:artist:3QLIkT4rD2FMusaqmkepbq"
+                        }
+                    ],
+                    "available_markets": ["AD", "AE"],
+                    "external_urls": {
+                        "spotify": "https://open.spotify.com/album/1mH4ntQRUk1akxx6WNST8q"
+                    },
+                    "href": "https://api.spotify.com/v1/albums/1mH4ntQRUk1akxx6WNST8q",
+                    "id": "1mH4ntQRUk1akxx6WNST8q",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/ab67616d0000b27379a74bed80ea8e2ac850af1f",
+                            "width": 640
+                        }
+                    ],
+                    "name": "Waves",
+                    "release_date": "2017-10-27",
+                    "release_date_precision": "day",
+                    "total_tracks": 13,
+                    "type": "album",
+                    "uri": "spotify:album:1mH4ntQRUk1akxx6WNST8q"
+                },
+                "artists": [
+                    {
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/artist/3QLIkT4rD2FMusaqmkepbq"
+                        },
+                        "href": "https://api.spotify.com/v1/artists/3QLIkT4rD2FMusaqmkepbq",
+                        "id": "3QLIkT4rD2FMusaqmkepbq",
+                        "name": "Rachel Platten",
+                        "type": "artist",
+                        "uri": "spotify:artist:3QLIkT4rD2FMusaqmkepbq"
+                    }
+                ],
+                "available_markets": ["AD","AE"],
+                "disc_number": 1,
+                "duration_ms": 205786,
+                "explicit": false,
+                "external_ids": {
+                    "isrc": "USSM11708394"
+                },
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/track/2RZvxgQsFR1mUcwFZpsav9"
+                },
+                "href": "https://api.spotify.com/v1/tracks/2RZvxgQsFR1mUcwFZpsav9",
+                "id": "2RZvxgQsFR1mUcwFZpsav9",
+                "is_local": false,
+                "name": "Collide",
+                "popularity": 54,
+                "preview_url": "https://p.scdn.co/mp3-preview/7bcbcad7258906323dd47da2c197616b8863211c?cid=5aef7021adaa4616a023abf0deaf6e9b",
+                "track_number": 3,
+                "type": "track",
+                "uri": "spotify:track:2RZvxgQsFR1mUcwFZpsav9"
+            }
+        ],
+        "limit": 5,
+        "next": null,
+        "offset": 0,
+        "previous": null,
+        "total": 1
+    }
+}
+```
+
 #### The UI:
-The user interface is implemented using ReactJS. The user inputs a phrase and clicks Submit, which takes them to their personalized mood playlist. The background of their playlist page is customized based on the range of their positive or negative sentiment score. The highest range is > 0.99 (both highly positive or highly negative), which results in the lightest background for the positive range and darkest background for the negative range (both ranges: > 0.99, > 0.97 & < 0.99, > 0.90 & < 0.97, > 0.80 & < 0.90, < 0.80). The background color gradients proceedingly get darker the less positive the playlist becomes, and lighter the less negative it becomes. We also give users a little message at the top above the playlist tailored to their mood.
+The user interface is implemented using ReactJS. The user inputs a phrase and clicks Submit, which takes them to their personalized mood playlist. The background of their playlist page is customized based on the range of their positive or negative sentiment score. The highest range is > 0.99 (both highly positive or highly negative), which results in the lightest background for the positive range and darkest background for the negative range (both ranges: > 0.99, > 0.97 & < 0.99, > 0.90 & < 0.97, > 0.80 & < 0.90, < 0.80). The background color gradients proceedingly get darker the less positive the playlist becomes, and lighter the less negative it becomes. We also give users a little message at the top above the playlist tailored to their mood. To listen to the songs, users can click on the title of the song and it will take them to spotify in a seperate tab. Users can also regenerate their mood list by hitting the back button.
 
 
 #### Gathering user feedback:
 
+The user is able to provide feedback for both the playlist results and for each song in the playlist result. There are three icons for feedback: "thumbs up", "happy face", and "sad face". Clicking the "thumbs up" indicates that the playlist or song matches the sentiment of the requested mood. Clicking the "happy face" indicates that the playlist or song needs to be more positive to match the mood. Clicking the "sad face" indicates that the playlist or song needs to be more negative to match the mood. If the user clicks the "happy face" or "sad face" icon for a playlist, the playlist re-generates in an attempt to output a playlist that better matches the sentiment. The metrics for each playlist and song are stored and displayed in a separate 'Stats' page.
 
 ### Team contributions:
 
@@ -117,4 +209,4 @@ Tayo Amuneke:
 
 Jessica Nwaogbe:
 
-Meng Mu:
+Meng Mu: Worked on the UI playlist view, made rest api call to spotify api to fetch song links and attached them to each song to allow users to listen to it.

@@ -31,7 +31,7 @@ export default function Playlist() {
 
   useEffect(() => {
     const fetchPlaylistTracks = playlistData.map(async (songInfo) => {
-      const result = await getTracksFromSpotify(songInfo.title);
+      const result = await getTracksFromSpotify(songInfo.title.split(" by")[0], songInfo.artiste);
       return result.tracks;
     });
 
@@ -50,9 +50,8 @@ export default function Playlist() {
   }, []);
 
   useEffect(() => {
-    console.log("regenerated")
     const fetchPlaylistTracks = playlistData.map(async (songInfo) => {
-      const result = await getTracksFromSpotify(songInfo.title);
+      const result = await getTracksFromSpotify(songInfo.title.split(" by")[0], songInfo.artiste);
       return result.tracks;
     });
 

@@ -15,12 +15,12 @@ export const getSpotifyAuth = () => {
         .then(res => res.json())
 }
 
-export const getTracksFromSpotify = (query) => {
+export const getTracksFromSpotify = (title, artiste) => {
     return getSpotifyAuth()
         .then((result) => {
             const token = result.access_token
             return fetch(SPOTIFY_SEARCH_URL + new URLSearchParams({
-                q: query,
+                q: `track:${title} artist:${artiste}`,
                 type: 'track',
                 limit: 5
             }), {
