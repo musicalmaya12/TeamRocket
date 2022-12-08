@@ -209,6 +209,6 @@ Maya Subramanian: Processed the song data using Flair, created the sentiment sco
 
 Tayo Amuneke: 
 
-Jessica Nwaogbe:
+Jessica Nwaogbe: Created the input page and statistics page for the UI. Added the functionality for re-generating the playlists and recording the user feedback. 
 
 Meng Mu: Worked on the UI playlist view, made rest api call to spotify api to fetch song links and attached them to each song to allow users to listen to it.
