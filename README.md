@@ -1,6 +1,8 @@
 # The Mood Playlist Generator
 
-#### How to use the application:
+### How to use the application:
+
+Clone this repository to your local machine.
 
 To run the app, follow these steps (one time installation):
 1. `cd app`
@@ -11,7 +13,7 @@ Next, run the application:
 1. `cd app`
 2. `npm start`
 
-#### Backend Initiatization - to use the API (on FastAPI)
+#### Backend Initialization - to use the API (on FastAPI)
 1. `cd app`
 2. Install stuff: `pip install -r requirements.txt`
 3. Run `uvicorn app.server.main:app --reload`
@@ -35,63 +37,84 @@ Sample Response
       "artiste": " One Direction ",
       "title": "If I Could Fly by One Direction",
       "thumbnail": "https://images.genius.com/d1815a034dd35663795e483d8a62ea5f.1000x1000x1.jpg",
-      "link": "https://twitter.com/elon"
     },
     {
       "artiste": " Draaco Aventura ",
       "title": "Insaciable by Draaco Aventura",
       "thumbnail": "https://images.genius.com/0bfc284e0c63e81511b883bfa4ab2c9b.1000x1000x1.jpg",
-      "link": "https://twitter.com/elon"
     },
     {
       "artiste": " One Direction ",
       "title": "Night Changes by One Direction",
       "thumbnail": "https://images.rapgenius.com/a8c066965cd804df56261afe172cce2b.1000x1000x1.jpg",
-      "link": "https://twitter.com/elon"
     },
     {
       "artiste": " Drake ",
       "title": "Hold On, We're Going Home by Drake (Ft. Majid Jordan)",
       "thumbnail": "https://images.rapgenius.com/f545371242592e32983526102bd7b01d.600x600x1.jpg",
-      "link": "https://twitter.com/elon"
     },
     {
       "artiste": " Carrie Underwood ",
       "title": "Jesus, Take the Wheel by Carrie Underwood",
       "thumbnail": "https://images.genius.com/6da12b47f7f56625a73187f3ab93d562.1000x1000x1.jpg",
-      "link": "https://twitter.com/elon"
     },
     {
       "artiste": " Drake ",
       "title": "From Time by Drake (Ft. Jhené Aiko)",
       "thumbnail": "https://images.genius.com/6d70f1e6d38e9af4ddb7b3582a40dab8.1000x1000x1.jpg",
-      "link": "https://twitter.com/elon"
     },
     {
       "artiste": " One Direction ",
       "title": "Story of My Life by One Direction",
       "thumbnail": "https://images.rapgenius.com/87839ab693a21fe86fbb9d2812748705.960x960x1.png",
-      "link": "https://twitter.com/elon"
     },
     {
       "artiste": " Drake ",
       "title": "Hotline Bling by Drake",
       "thumbnail": "https://images.genius.com/f3be0158d3a067a81b075686a3a2e63d.1000x1000x1.png",
-      "link": "https://twitter.com/elon"
     },
     {
       "artiste": " Joey + Rory ",
       "title": "I Need Thee Every Hour by Joey + Rory",
       "thumbnail": "https://images.genius.com/696da21338fdf225eb42457082f4760a.1000x1000x1.jpg",
-      "link": "https://twitter.com/elon"
     },
     {
       "artiste": " One Direction ",
       "title": "Drag Me Down by One Direction",
       "thumbnail": "https://images.rapgenius.com/81f934585e8735158bab36d3cf5d9520.1000x1000x1.jpg",
-      "link": "https://twitter.com/elon"
     }
   ]
 }
 ```
-#### How the application is implemented:
+### How the application is implemented:
+
+#### Creating our database of songs:
+
+#### Creating our API using FastAPI:
+
+#### Generating sentiment scores for each song in our database and saving this information for the score matching algorithm:
+
+After our database of 2000 songs was saved locally in a pickle file, we turned the file into a Pandas DataFrame and processed the lyrics for each song using Flair (https://github.com/flairNLP/flair). We created a Text Classifier and ran the lyrics for each song through the predict() function to get its' sentiment ('POSITIVE' or 'NEGATIVE') and the corresponding sentiment score (0 - 1.0). We created two new DataFrames, 'positive_df' and 'negative_df', where we split up the 'POSITIVE' labeled songs vs. the 'NEGATIVE' labeled songs. These two DataFrames contain the columns 'artiste', 'title', 'thumbnail', 'score', and 'label'. Then, we turned these two DataFrames into two new pickle files, '2000songs_negative_df.pkl' and '2000songs_positive_df.pkl', and saved them into our SongProcessor folder under our main app folder.
+
+#### The sentiment score matching algorithm:
+
+We used the Flair sentiment analysis functionality to get the sentiment score for our user-inputted phrase, as well. This allows the scores for the user-inputted phrase and the song library to be on the same scale. After getting the sentiment score of the user's phrase, we check if the sentiment is positive or negative. If positive, we compare the user's numerical sentiment score to the song's numerical sentence scores in 2000songs_positive_df and return back the 10 songs with the closest sentiment scores. To calculate this, we use nsmallest from heapq and get the 10 scores with the smallest difference from the user-inputted phrase (hence, the closest scores). We do the same thing with negative songs but use 2000songs_negative_df instead. We then gather all the information for the 10 closest songs and return them in an array along with the sentiment label and score. The data returned is fetched from the API when the user enters a phrase and clicks Submit in the application.
+
+#### Usage of the Spotify API to link our playlist to Spotify:
+
+#### The UI:
+The user interface is implemented using ReactJS. The user inputs a phrase and clicks Submit, which takes them to their personalized mood playlist. The background of their playlist page is customized based on the range of their positive or negative sentiment score. The highest range is > 0.99 (both highly positive or highly negative), which results in the lightest background for the positive range and darkest background for the negative range (both ranges: > 0.99, > 0.97 & < 0.99, > 0.90 & < 0.97, > 0.80 & < 0.90, < 0.80). The background color gradients proceedingly get darker the less positive the playlist becomes, and lighter the less negative it becomes. We also give users a little message at the top above the playlist tailored to their mood.
+
+
+#### Gathering user feedback:
+
+
+### Team contributions:
+
+Maya Subramanian: Processed the song data using Flair, created the sentiment score matching algorithm, customized the UI backgrounds and phrases returned based on sentiment score ranges
+
+Tayo Amuneke: 
+
+Jessica Nwaogbe:
+
+Meng Mu:
