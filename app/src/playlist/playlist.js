@@ -41,8 +41,8 @@ export default function Playlist() {
         console.log("Error: " + error);
       });
 
-      // sets playlist name to avoid putting in feedback data in name
-      setPlaylistName(playlistMood.toString()[0].toUpperCase() + playlistMood.toString().substring(1).toLowerCase())
+    // sets playlist name to avoid putting in feedback data in name
+    setPlaylistName(playlistMood.toString()[0].toUpperCase() + playlistMood.toString().substring(1).toLowerCase())
 
   }, []);
 
@@ -62,12 +62,10 @@ export default function Playlist() {
 
   const regeneratePlaylist = (feedback) => {
     if (feedback === MORE_POSITIVE) {
-      if (playlistSentiment[0] === 'positive') {
-        generatePlaylist(navigate, playlistMood + ' positive');
-      }
-      else if (feedback === MORE_NEGATIVE) {
-        generatePlaylist(navigate, playlistMood + ' negative');
-      }
+      generatePlaylist(navigate, playlistMood + ' positive');
+      setRegenerated(true);
+    } else if (feedback === MORE_NEGATIVE) {
+      generatePlaylist(navigate, playlistMood + ' negative');
       setRegenerated(true);
     }
     else {
@@ -124,7 +122,7 @@ export default function Playlist() {
       </div>
       <h1 className="playlist-title">
         <span>
-          {`${playlistName.replace(/positive/g, '').replace(/negative/g, '') +' Playlist'
+          {`${playlistName.replace(/positive/g, '').replace(/negative/g, '') + ' Playlist'
             }`}
         </span>
         <Feedback regeneratePlaylist={regeneratePlaylist} />
