@@ -49,6 +49,24 @@ export default function Playlist() {
 
   }, []);
 
+  useEffect(() => {
+    console.log("regenerated")
+    const fetchPlaylistTracks = playlistData.map(async (songInfo) => {
+      const result = await getTracksFromSpotify(songInfo.title);
+      return result.tracks;
+    });
+
+    Promise.all(fetchPlaylistTracks)
+      .then((results) => {
+        setTracks(results);
+      })
+
+      .catch((error) => {
+        console.log("Error: " + error);
+      });
+
+  }, [playlistData, regenerated]);
+
 
   const getUrls = (name) => {
     const trackInfo = tracks.filter((track) =>
@@ -65,11 +83,11 @@ export default function Playlist() {
 
   const regeneratePlaylist = (feedback) => {
     if (feedback === MORE_POSITIVE) {
+      setRegenerated(true);
       generatePlaylist(navigate, playlistMood + ' positive');
-      setRegenerated(true);
     } else if (feedback === MORE_NEGATIVE) {
-      generatePlaylist(navigate, playlistMood + ' negative');
       setRegenerated(true);
+      generatePlaylist(navigate, playlistMood + ' negative');
     }
     else {
       setRegenerated(false);
