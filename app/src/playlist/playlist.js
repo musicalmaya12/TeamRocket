@@ -50,7 +50,6 @@ export default function Playlist() {
   }, []);
 
   useEffect(() => {
-    console.log("regenerated")
     const fetchPlaylistTracks = playlistData.map(async (songInfo) => {
       const result = await getTracksFromSpotify(songInfo.title);
       return result.tracks;
