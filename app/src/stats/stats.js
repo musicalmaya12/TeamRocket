@@ -3,8 +3,8 @@ import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Resp
 
 import './stats.css';
 
-export default function Stats() {
-
+export default function Stats({statsData}) {
+  console.log(statsData)
   const data = [
     {
       name: 'Page A',

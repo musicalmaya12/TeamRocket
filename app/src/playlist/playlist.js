@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getTracksFromSpotify } from "../services/spotify";
 import { generatePlaylist } from "../main/input/input";
@@ -15,6 +15,7 @@ import Tooltip from "@mui/material/Tooltip";
 import Button from "@mui/material/Button";
 import Feedback from "./feedback/feedback";
 import { MORE_POSITIVE, MORE_NEGATIVE } from "../services/constants";
+import { DataContext } from "..";
 
 /*
 Function to create user's mood playlist.
@@ -27,6 +28,8 @@ export default function Playlist() {
   const [tracks, setTracks] = useState([]);
   const [regenerated, setRegenerated] = useState(false);
   const [playlistName, setPlaylistName] = useState('');
+  const [statsData, setStatsData] = useContext(DataContext);
+  
   let navigate = useNavigate();
 
   useEffect(() => {
@@ -43,10 +46,8 @@ export default function Playlist() {
       .catch((error) => {
         console.log("Error: " + error);
       });
-
     // sets playlist name to avoid putting in feedback data in name
     setPlaylistName(playlistMood.toString()[0].toUpperCase() + playlistMood.toString().substring(1).toLowerCase())
-
   }, []);
 
   useEffect(() => {
@@ -146,7 +147,7 @@ export default function Playlist() {
           {`${playlistName.replace(/positive/g, '').replace(/negative/g, '') + ' Playlist'
             }`}
         </span>
-        <Feedback regeneratePlaylist={regeneratePlaylist} />
+        <Feedback playlistName={playlistName} regeneratePlaylist={regeneratePlaylist} statsData={statsData} setStatsData={setStatsData} />
       </h1>
       {playlistSentiment[0] === 'positive' ?
         (parseFloat(playlistSentiment[1]) > 0.99 ?

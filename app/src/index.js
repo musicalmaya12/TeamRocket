@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import {
   createBrowserRouter,
@@ -7,29 +7,46 @@ import {
 import './index.css';
 import Main from './main/main';
 import Playlist from './playlist/playlist';
-import Stats from './stats/stats';
 import reportWebVitals from './reportWebVitals';
+import Stats from './stats/stats';
 
+export const DataContext = React.createContext('');
+
+const App = ({ children }) => {
+  const [ statsData, setStatsData] = useState([]);
+
+  return (
+    <DataContext.Provider value={[statsData, setStatsData]}>
+      {children}
+    </DataContext.Provider>
+  )
+}
 const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Main />,
-  },
-  {
-    path: "/playlist",
-    element: <Playlist />,
-  },
-  {
-    path: "/stats",
-    element: <Stats />
-  }
+  
+      {
+        path: "/",
+        element: <Main />,
+      },
+      {
+        path: "/playlist",
+        element: <Playlist />,
+      },
+      {
+        path: "stats",
+        element: <Stats />
+      }
+    
+  
+
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
   <React.StrictMode>
+    <App>
     <RouterProvider router={router} />
+    </App>
   </React.StrictMode>
 );
 

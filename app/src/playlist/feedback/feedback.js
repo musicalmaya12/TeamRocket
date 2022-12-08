@@ -8,16 +8,44 @@ import { Tooltip } from "@mui/material";
 /*
 Handles user feedback.
 */
-export default function Feedback({ regeneratePlaylist }) {
+export default function Feedback({ playlistName, regeneratePlaylist, statsData, setStatsData }) {
 
     const [feedback, setFeedback] = useState(null);
 
     const handleClick = (newFeedback) => {
+        const stat = statsData && Array.isArray(statsData) && statsData.find(element => element.name === playlistName);
+
+        if (stat) {
+            if (feedback === GOOD) {
+                stat.good = true;
+            } else {
+                stat.good = false;
+
+                if (feedback === MORE_NEGATIVE) {
+                    stat.tooNegative += 1;
+                } else {
+                    stat.tooPositive += 1;
+                }
+            }
+        }
+
+
+
         setFeedback(newFeedback);
 
         if (regeneratePlaylist) {
+            if (stat) {
+                stat.retries += 1;
+            }
+
             regeneratePlaylist(newFeedback);
         }
+
+        const newData = statsData.filter(function(e) { return e.name !== playlistName })
+
+        setStatsData(newData.push(stat))
+
+        console.log(statsData)
     }
 
     const feedbackMatches = (matchStr) => {
