@@ -112,6 +112,9 @@ The user interface is implemented using ReactJS. The user inputs a phrase and cl
 ### Team contributions:
 
 Maya Subramanian: Processed the song data using Flair, created the sentiment score matching algorithm, customized the UI backgrounds and phrases returned based on sentiment score ranges
-Tayo Amuneke:
+
+Tayo Amuneke: 
+
 Jessica Nwaogbe:
+
 Meng Mu:
