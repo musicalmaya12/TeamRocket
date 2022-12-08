@@ -23,6 +23,7 @@ class FlairSentimentAnalyzer(SongProcessor):
         self.process_data()
 
 
+    # Gives user-inputted phrase a sentiment score and matches input to 10 songs with the most closest sentiment scores to it
     def process_input(self, user_mood) -> Tuple[List[Song], str]:
         # runs sentiment analysis on user input
         phraseSentiment = Sentence(user_mood)
@@ -35,27 +36,26 @@ class FlairSentimentAnalyzer(SongProcessor):
         mood = f'positive, {phraseScore}'
         # matches user input based on Positive or Negative sentiment to ten songs closest to its sentiment score
         if "POSITIVE" in str(mySentiment):
-            # matching function
             closest_ten_pos = nsmallest(10, self.positive_df['score'], key=lambda x: abs(x - phraseScore))
             for value in closest_ten_pos:
                 ten_song_list.append(Song(
-                    artiste=FlairSentimentAnalyzer.get_song_field(self.positive_df, value,"artiste").strip(),
-                    title =  FlairSentimentAnalyzer.get_song_field(self.positive_df, value,'title').strip().replace('\xa0', ' '),
+                    artiste = FlairSentimentAnalyzer.get_song_field(self.positive_df, value,"artiste").strip(),
+                    title = FlairSentimentAnalyzer.get_song_field(self.positive_df, value,'title').strip().replace('\xa0', ' '),
                     thumbnail = FlairSentimentAnalyzer.get_song_field(self.positive_df, value, 'thumbnail').strip(),
                 ))
         elif "NEGATIVE" in str(mySentiment):
             mood = f'negative, {phraseScore}'
-            # matching function
             closest_ten_neg = nsmallest(10, self.negative_df['score'], key=lambda x: abs(x - phraseScore))
             for value in closest_ten_neg:
                 ten_song_list.append(Song(
-                    artiste=FlairSentimentAnalyzer.get_song_field(self.negative_df, value,"artiste").strip(),
-                    title =  FlairSentimentAnalyzer.get_song_field(self.negative_df, value,'title').strip().replace('\xa0', ' '),
+                    artiste = FlairSentimentAnalyzer.get_song_field(self.negative_df, value,"artiste").strip(),
+                    title = FlairSentimentAnalyzer.get_song_field(self.negative_df, value,'title').strip().replace('\xa0', ' '),
                     thumbnail = FlairSentimentAnalyzer.get_song_field(self.negative_df, value, 'thumbnail').strip(),
                 ))
               
         return ten_song_list, mood     
 
+    # Opens pickle files and converts to Pandas DataFrames for matching algorithm
     def process_data(self) -> None:
         pos_song_list = List[dict]
         neg_song_list = List[dict]
@@ -69,6 +69,7 @@ class FlairSentimentAnalyzer(SongProcessor):
         self.negative_df = pd.DataFrame.from_records(neg_song_list)
         print('Hooray!!!!! Data processed!')
     
+    # Function to simplify Pandas DataFrame search functionality
     @classmethod
     def get_song_field(self, df: pd.DataFrame, score: float, col: str) -> str:
         return str(df.loc[df['score'].eq(score), col].iloc[0])

@@ -5,7 +5,9 @@ from flair.data import Sentence
 from heapq import nsmallest
 import pandas as pd
 
+# We used all this code for testing purposes as well as generating 2000songs_negative_df.pkl and 2000songs_positive_df.pkl
 
+# Function to open pickle files and convert them to Pandas DataFrames
 def get_data():
     pos_song_list = List[dict]
     neg_song_list = List[dict]
@@ -19,12 +21,12 @@ def get_data():
         song_list = pickle.load(f)
     song_list = pd.DataFrame.from_records(song_list)
     playlist_getter(positive_df, negative_df)
-    #process_data(song_list)
     return positive_df, negative_df
 
+# Function that tested matching algorithm
 def playlist_getter(positive_df, negative_df):
     textClassifier = TextClassifier.load('en-sentiment')
-    phraseSentiment = Sentence('I am feeling excited for the end of the semester!')
+    phraseSentiment = Sentence('the cat jumped over the moon')
     textClassifier.predict(phraseSentiment)
     mySentiment = phraseSentiment.labels[0]
     phraseScore = phraseSentiment.score
@@ -53,6 +55,7 @@ def playlist_getter(positive_df, negative_df):
             })
         print(ten_song_list)
 
+# Processed data from original 2000songs.pkl to two new pickle files with sentiment scores
 def process_data(df):
     positive_artists = []
     negative_artists = []
