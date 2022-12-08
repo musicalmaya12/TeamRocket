@@ -16,6 +16,9 @@ import Button from "@mui/material/Button";
 import Feedback from "./feedback/feedback";
 import { MORE_POSITIVE, MORE_NEGATIVE } from "../services/constants";
 
+/*
+Function to create user's mood playlist.
+*/
 export default function Playlist() {
   const { state } = useLocation();
   const playlistData = state.playlistData.playlist || [];

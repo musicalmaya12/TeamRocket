@@ -5,6 +5,9 @@ import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDiss
 import { GOOD, MORE_NEGATIVE, MORE_POSITIVE } from '../../services/constants';
 import { Tooltip } from "@mui/material";
 
+/*
+Handles user feedback.
+*/
 export default function Feedback({ regeneratePlaylist }) {
 
     const [feedback, setFeedback] = useState(null);
@@ -31,13 +34,13 @@ export default function Feedback({ regeneratePlaylist }) {
             </Tooltip>
             <Tooltip title="Needs more positivity">
                 <SentimentSatisfiedAltIcon
-                    sx={{ color: feedbackMatches(MORE_POSITIVE) ? "#ff7373" : "rgb(255 255 255 / 80%)", "&:hover": { color: "#fff135", cursor: "pointer" } }}
+                    sx={{ color: feedbackMatches(MORE_POSITIVE) ? "#41dbdf" : "rgb(255 255 255 / 80%)", "&:hover": { color: "#fff135", cursor: "pointer" } }}
                     onClick={() => handleClick(MORE_POSITIVE)}
                 />
             </Tooltip>
             <Tooltip title="Needs more negativity">
                 <SentimentVeryDissatisfiedIcon
-                    sx={{ color: feedbackMatches(MORE_NEGATIVE) ? "#ff7373" : "rgb(255 255 255 / 80%)", "&:hover": { color: "#41dbdf", cursor: "pointer" } }}
+                    sx={{ color: feedbackMatches(MORE_NEGATIVE) ? "#41dbdf" : "rgb(255 255 255 / 80%)", "&:hover": { color: "#ff7373", cursor: "pointer" } }}
                     onClick={() => handleClick(MORE_NEGATIVE)}
                 />
             </Tooltip>

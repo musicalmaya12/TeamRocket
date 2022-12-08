@@ -5,6 +5,9 @@ import Button from '@mui/material/Button';
 import './input.css';
 import { getMoodPlaylist } from '../../services/generator';
 
+/*
+Handles user input to send to API
+*/
 export default function Input({ hintText }) {
     const [message, setMessage] = useState('');
     const navigate = useNavigate();
