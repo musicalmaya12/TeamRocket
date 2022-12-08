@@ -108,7 +108,7 @@ The user interface is implemented using ReactJS. The user inputs a phrase and cl
 
 #### Gathering user feedback:
 
-The user is able to provide feedback for both the playlist results and for each song in the playlist result. There are three icons for feedback: "thumbs up", "happy face", and "sad face". Clicking the "thumbs up" indicates that the playlist or song matches the sentiment of the mood the user inputted. Clicking the "happy face" indicates that the playlist or song needs to be more positive to match the mood. Clicking the "sad face" indicates that the playlist or song needs to be more negative to match the mood. If the user clicks the "happy face" or "sad face" icon for a playlist, the playlist re-generates in an attempt to output a playlist that better matches the sentiment. The metrics for each playlist and song are stored and displayed in a 
+The user is able to provide feedback for both the playlist results and for each song in the playlist result. There are three icons for feedback: "thumbs up", "happy face", and "sad face". Clicking the "thumbs up" indicates that the playlist or song matches the sentiment of the mood the user inputted. Clicking the "happy face" indicates that the playlist or song needs to be more positive to match the mood. Clicking the "sad face" indicates that the playlist or song needs to be more negative to match the mood. If the user clicks the "happy face" or "sad face" icon for a playlist, the playlist re-generates in an attempt to output a playlist that better matches the sentiment. The metrics for each playlist and song are stored and displayed in a separate 'Stats' page.
 
 ### Team contributions:
 
