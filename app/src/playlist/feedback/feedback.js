@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
 import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
 import { GOOD, MORE_NEGATIVE, MORE_POSITIVE } from '../../services/constants';
 import { Tooltip } from "@mui/material";
+import { setStats } from "../../services/generator";
 
 /*
 Handles user feedback.
 */
-export default function Feedback({ regeneratePlaylist }) {
-
+export default function Feedback({ sentiment, regeneratePlaylist }) {
     const [feedback, setFeedback] = useState(null);
 
     const handleClick = (newFeedback) => {
@@ -18,6 +18,15 @@ export default function Feedback({ regeneratePlaylist }) {
         if (regeneratePlaylist) {
             regeneratePlaylist(newFeedback);
         }
+
+        if (newFeedback !== GOOD) {
+            if (newFeedback !== MORE_NEGATIVE) {
+                setStats(sentiment, "tooNegative")
+            } else {
+                setStats(sentiment, "tooPositive")
+            }
+        }
+
     }
 
     const feedbackMatches = (matchStr) => {

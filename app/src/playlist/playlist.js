@@ -145,7 +145,7 @@ export default function Playlist() {
           {`${playlistName.replace(/positive/g, '').replace(/negative/g, '') + ' Playlist'
             }`}
         </span>
-        <Feedback regeneratePlaylist={regeneratePlaylist} />
+        <Feedback sentiment={playlistSentiment[0]} regeneratePlaylist={regeneratePlaylist} />
       </h1>
       {playlistSentiment[0] === 'positive' ?
         (parseFloat(playlistSentiment[1]) > 0.99 ?
