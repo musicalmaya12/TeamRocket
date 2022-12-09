@@ -3,7 +3,7 @@
 ### Overview
 The Mood Playlist Generator is an application that uses sentiment analysis to generate "smart" playlists depending on a user's mood. We retrieve song information from the Spotify API and lyrics from the Genius API and store this data in a local datastore. We process this data using Flair, a natural language processing library, for sentiment analysis on the song information and user-inputted phrase. We use a matching algorithm between the phrase and songs to output a playlist with ten songs that can be listened to on Spotify.
 
-### Video demo
+### Video demo (please download the video for full high-quality resolution)
 https://drive.google.com/file/d/146cqUF1BjlVZfNuvATw1R7auFf1vTnFb/view?usp=sharing
 
 ### How to use the application
