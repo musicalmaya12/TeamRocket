@@ -212,6 +212,9 @@ Sample Response:
 #### The UI:
 The user interface is implemented using ReactJS. The user inputs a phrase and clicks Submit, which takes them to their personalized mood playlist. The background of their playlist page is customized based on the range of their positive or negative sentiment score. The highest range is > 0.99 (both highly positive or highly negative), which results in the lightest background for the positive range and darkest background for the negative range (both ranges: > 0.99, > 0.97 & < 0.99, > 0.90 & < 0.97, > 0.80 & < 0.90, < 0.80). The background color gradients proceedingly get darker the less positive the playlist becomes, and lighter the less negative it becomes. We also give users a little message at the top above the playlist tailored to their mood. To listen to the songs, users can click on the title of the song and it will take them to spotify in a seperate tab. Users can also regenerate their mood list by hitting the back button.
 
+![image](https://user-images.githubusercontent.com/109922285/206602546-8cbb67a7-3a1d-4c92-a148-ed874e0a31a9.png)
+
+
 
 #### Gathering user feedback:
 
