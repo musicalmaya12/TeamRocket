@@ -1,32 +1,22 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as ChartTooltip, Legend, ResponsiveContainer } from 'recharts';
 import Button from "@mui/material/Button";
-import Tooltip  from "@mui/material/Tooltip";
+import Tooltip from "@mui/material/Tooltip";
 
 import './stats.css';
+import { getStats } from "../services/generator";
 
 export default function Stats() {
-  const [data, useData] = useState([]);
+  const [data, setData] = useState([]);
   let navigate = useNavigate();
 
   useEffect(() => {
-    // const fetchPlaylistTracks = playlistData.map(async (songInfo) => {
-    //   const result = await getTracksFromSpotify(songInfo.title.split(" by")[0], songInfo.artiste);
-    //   return result.tracks;
-    // });
 
-    // Promise.all(fetchPlaylistTracks)
-    //   .then((results) => {
-    //     setTracks(results);
-    //   })
-
-    //   .catch((error) => {
-    //     console.log("Error: " + error);
-    //   });
-
-    // // sets playlist name to avoid putting in feedback data in name
-    // setPlaylistName(playlistMood.toString()[0].toUpperCase() + playlistMood.toString().substring(1).toLowerCase())
+    getStats()
+      .then((results) => {
+        setData(results);
+      })
 
   }, []);
 
