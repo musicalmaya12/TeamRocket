@@ -260,6 +260,11 @@ Jessica Nwaogbe: Created the input page and statistics page for the UI, added th
 Meng Mu: Worked on the UI playlist view, made rest api call to Spotify API to fetch song links and attached them to each song to allow users to listen to it.
 
 ### Challenges
+* The sentence boundaries for lyrics posed a problem during processing. Lyrics sometimes continue on new line and sometimes bounded by only commas. We used new line boundary to store them, even if we are aware that a sentence boundary algorithm may provide a better performance
+* Flair uses 512 token length per block, as it uses BERT internally. We ignored lyrics with words over 512. A different token formatting or chorus inclusion may be good for future works.
+* Getting the lyrics data files posed a challenge as stated in the progress report. A dataset in a desired format may be a great task.
+* We explored other technics like topic modelling using TopicBERT and Sentence Similarity with Query Expansion. They proved to not really give good results because of the above two reasons. A further study on this may provide interesting results.
+
 
 ### References and Libraries
 Spotify API: https://api.spotify.com/
