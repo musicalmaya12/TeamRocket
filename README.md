@@ -253,17 +253,17 @@ Playlist with user feedback to make it more negative
 
 Maya Subramanian: Processed the song data using Flair, created the sentiment score matching algorithm, customized the UI backgrounds and phrases returned based on sentiment score ranges.
 
-Tayo Amuneke: Created the FastAPI endpoint, set up the Lyrics fetcher for songs from the Genius API.
+Tayo Amuneke: Created the FastAPI endpoint, set up the Lyrics fetcher for songs from the Genius API, challenges documentation for data extraction
 
 Jessica Nwaogbe: Created the input page and statistics page for the UI, added the functionality for re-generating the playlists and recording the user feedback. 
 
 Meng Mu: Worked on the UI playlist view, made rest api call to Spotify API to fetch song links and attached them to each song to allow users to listen to it.
 
 ### Challenges
-* The sentence boundaries for lyrics posed a problem during processing. Lyrics sometimes continue on new line and sometimes bounded by only commas. We used new line boundary to store them, even if we are aware that a sentence boundary algorithm may provide a better performance
-* Flair uses 512 token length per block, as it uses BERT internally. We ignored lyrics with words over 512. A different token formatting or chorus inclusion may be good for future works.
+* The sentence boundaries for lyrics posed a problem during processing. Lyrics sometimes continue on new line and are sometimes bounded by only commas. We used new line boundary to store them, we are aware that a sentence boundary algorithm may provide a better performance
+* Flair uses 512 token length per block, as it uses BERT internally. We ignored lyrics with words over 512. A different token formatting or chorus inclusion may be good for future work.
 * Getting the lyrics data files posed a challenge as stated in the progress report. A dataset in a desired format may be a great task.
-* We explored other technics like topic modelling using TopicBERT and Sentence Similarity with Query Expansion. They proved to not really give good results because of the above two reasons. A further study on this may provide interesting results.
+* We explored other techniques like topic modelling using TopicBERT and Sentence Similarity with Query Expansion. They proved to not really give good results because of the above two reasons. A further study on this may provide interesting results.
 
 
 ### References and Libraries
