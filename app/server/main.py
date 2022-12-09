@@ -2,6 +2,7 @@ from typing import Union
 
 from fastapi import FastAPI, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
 try:
     from app.server.Model.request_model import MoodRequest, MoodRespond, StatRequest, StatResponse
     from app.server.SongProcessor.flair_processor import FlairSentimentAnalyzer
@@ -14,8 +15,8 @@ app = FastAPI()
 flair_processor = FlairSentimentAnalyzer()
 
 stats = {
-    "negative": StatResponse(),
-    "positive": StatResponse() 
+    "negative": {'tooPositive': 0, 'tooNegative': 0},
+    "positive": {'tooPositive': 0, 'tooNegative': 0}
 }
 
 origins = ["*"]
@@ -67,15 +68,16 @@ async def set_stat(request: StatRequest):
 
     if request.sentiment == "positive":
         if request.value == "tooPositive":
-            stats["positive"].tooPositive +=1
+            stats["positive"]["tooPositive"] +=1
         else:
-            stats["positive"].tooNegative +=1
+            stats["positive"]["tooNegative"] +=1
     else:
         if request.value == "tooPositive":
-            stats["negative"].tooPositive +=1
+            stats["negative"]["tooPositive"] +=1
         else:
-            stats["negative"].tooNegative +=1
-
+            stats["negative"]["tooNegative"] +=1
+    return True
+    
 @app.get("/get_stat/")
 async def get_stat():
     return stats

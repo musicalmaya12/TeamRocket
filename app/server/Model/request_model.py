@@ -6,11 +6,6 @@ class Song(BaseModel):
     title: str
     thumbnail: str
     
-class StatValue:
-     tooPositive: int
-     tooNegative: int
-
-
 class MoodRequest(BaseModel):
     phrase: str
 
@@ -23,5 +18,5 @@ class StatRequest(BaseModel):
     value: str
 
 class StatResponse(BaseModel):
-    positive: StatValue
-    negative: StatValue
+    positive: dict
+    negative: dict
