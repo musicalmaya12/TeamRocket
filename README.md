@@ -90,8 +90,19 @@ Sample Response
 ### How the application is implemented:
 
 #### Creating our database of songs:
+The song data was obtained from the GeniusAPI. To use this API we needed to pass in name of artiste to find and their associated top songs. We used MTVBase top artiste we found on github. We passed this into the genius API object in this format
+```
+genius = Genius(TOKEN, retries=3)
+songs = genius.search_artist(artiste, sort="popularity", max_songs=SONG_COUNT)
+```
+
+This data was is not labelled and postprocessing steps had to be done in the processing stage. The API was slow and can take a large amount of time to fully get all the songs. An alternative to this approach would have been to use the million songs dataset `http://millionsongdataset.com` which has labelled data in a bag of words format. The draw back to using it is that we lose the word ordering and sentence-piece module in Flair would not understand word ordering.
+
 
 #### Creating our API using FastAPI:
+To quickly set up the backend, we used FastAPI `https://fastapi.tiangolo.com`. We exposed two endpoints 
+1. `/get_mood` to accept post request from the client. This endpoint return the sentiment and the list of songs curated for that sentiment and takes in the phrase. It returns 400 response code for bad request
+2. `health` to return health of the app. 
 
 #### Generating sentiment scores for each song in our database and saving this information for the score matching algorithm:
 
@@ -210,3 +221,7 @@ Tayo Amuneke:
 Jessica Nwaogbe:
 
 Meng Mu: Worked on the UI playlist view, made rest api call to spotify api to fetch song links and attached them to each song to allow users to listen to it.
+
+
+
+### References and Libraries
