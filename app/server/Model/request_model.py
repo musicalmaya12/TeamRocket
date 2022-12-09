@@ -6,10 +6,9 @@ class Song(BaseModel):
     title: str
     thumbnail: str
     
-class StatValue:
+class StatValue(BaseModel):
      tooPositive: int
      tooNegative: int
-
 
 class MoodRequest(BaseModel):
     phrase: str
