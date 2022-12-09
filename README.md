@@ -218,7 +218,7 @@ Currently, the Statistics page displays two charts, which compare the metrics be
 
 Maya Subramanian: Processed the song data using Flair, created the sentiment score matching algorithm, customized the UI backgrounds and phrases returned based on sentiment score ranges
 
-Tayo Amuneke: 
+Tayo Amuneke: Created the FastAPI endpoint. Set up the Lyrics fetcher for songs from the Lyrics API
 
 Jessica Nwaogbe: Created the input page and statistics page for the UI. Added the functionality for re-generating the playlists and recording the user feedback. 
 
