@@ -5,6 +5,8 @@
 Clone this repository to your local machine.
 If you do not have Python 3.6, install that first.
 
+If you're facing issues with setup in your local machine, please run the app in your favorite virtual environment.
+
 To run the app, follow these steps (one time installation):
 1. `cd app`
 2.  `pip install -r requirements.txt` 
