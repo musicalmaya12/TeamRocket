@@ -1,5 +1,8 @@
 # The Mood Playlist Generator
 
+### Overview
+The Mood Playlist Generator is an application that uses sentiment analysis to generate "smart" playlists depending on a user's mood. We retrieve song information from the Spotify API and lyrics from the Genius API and store this data in a key, value NoSQL database (i.e. MongoDB). 
+
 ### How to use the application:
 
 Clone this repository to your local machine.
