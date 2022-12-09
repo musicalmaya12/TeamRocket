@@ -253,9 +253,9 @@ Playlist with user feedback to make it more negative
 
 Maya Subramanian: Processed the song data using Flair, created the sentiment score matching algorithm, customized the UI backgrounds and phrases returned based on sentiment score ranges
 
-Tayo Amuneke: Created the FastAPI endpoint. Set up the Lyrics fetcher for songs from the Genius API
+Tayo Amuneke: Created the FastAPI endpoint, set up the Lyrics fetcher for songs from the Genius API
 
-Jessica Nwaogbe: Created the input page and statistics page for the UI. Added the functionality for re-generating the playlists and recording the user feedback. 
+Jessica Nwaogbe: Created the input page and statistics page for the UI, added the functionality for re-generating the playlists and recording the user feedback. 
 
 Meng Mu: Worked on the UI playlist view, made rest api call to spotify api to fetch song links and attached them to each song to allow users to listen to it.
 
