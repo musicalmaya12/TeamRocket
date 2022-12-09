@@ -98,19 +98,19 @@ Sample Response
 ### How the application is implemented
 
 #### Creating our database of songs
-The song data was obtained from the GeniusAPI. To use this API we needed to pass in name of artiste to find and their associated top songs. We used MTVBase top artiste we found on github. We passed this into the genius API object in this format
+The song data was obtained from the GeniusAPI. To use this API we needed to pass in the name of the artiste to find their associated top songs. We used MTVBase top artistes we found on GitHub. We passed this into the GeniusAPI object in this format
 ```
 genius = Genius(TOKEN, retries=3)
 songs = genius.search_artist(artiste, sort="popularity", max_songs=SONG_COUNT)
 ```
 
-This data was is not labelled and postprocessing steps had to be done in the processing stage. The API was slow and can take a large amount of time to fully get all the songs. An alternative to this approach would have been to use the million songs dataset `http://millionsongdataset.com` which has labelled data in a bag of words format. The draw back to using it is that we lose the word ordering and sentence-piece module in Flair would not understand word ordering.
+This data was not labelled and postprocessing steps had to be done in the processing stage. The API was slow and took a large amount of time to fully get all the songs. An alternative to this approach would have been to use the million songs dataset `http://millionsongdataset.com` which has labelled data in a bag of words format. The draw back to using it is that we lose the word ordering and the sentence-piece module in Flair would not understand word ordering.
 
 
 #### Creating our API using FastAPI
 To quickly set up the backend, we used FastAPI `https://fastapi.tiangolo.com`. We exposed two endpoints 
-1. `/get_mood` to accept post request from the client. This endpoint return the sentiment and the list of songs curated for that sentiment and takes in the phrase. It returns 400 response code for bad request
-2. `health` to return health of the app. 
+1. `/get_mood` to accept post requests from the client. This endpoint returns the sentiment and the list of songs curated for that sentiment and takes in the phrase. It returns 400 response code for bad request.
+2. `health` to return the health of the app. 
 
 ![image](https://user-images.githubusercontent.com/109922285/206603286-6990eecb-99d7-4f07-b93e-c4bef79e6828.png)
 FastAPI
@@ -125,12 +125,12 @@ We used the Flair sentiment analysis functionality to get the sentiment score fo
 
 #### Usage of the Spotify API to link our playlist to Spotify
 
-We used Spotify API to fetch the information of the songs. First we generated a token from Spotify using https://accounts.spotify.com/api/token. Then with the token, we proceeded to obtain details of the songs using "Search for Item" API (https://api.spotify.com/v1/search). To use the Spotify "Search for Item" API (read more: https://developer.spotify.com/documentation/web-api/reference/#/operations/search), we passed 3 parameters to it, **q**, **type** and **limit**. 
+We used the Spotify API to fetch the information of the songs. First, we generated a token from Spotify using https://accounts.spotify.com/api/token. Then with the token, we proceeded to obtain details of the songs using "Search for Item" API (https://api.spotify.com/v1/search). To use the Spotify "Search for Item" API (read more: https://developer.spotify.com/documentation/web-api/reference/#/operations/search), we passed 3 parameters to it, **q**, **type** and **limit**. 
   - **q** (required): it allows filters including *album, artist, track, year, upc, tag:hipster, tag:new, isrc*, and *genre* to filter out irrelevant matches. We used *track* and *artist* to refine the matches.
   - **type** (required): we used *type: 'track'* to get information about the track.
   - **limit** (optional): we set *limit: 5* to get the top 5 matches.
 
-The response JSON from Spotify looks like the sample response below. Among the top 5 mathes we recieved from Spotify, we further refined these 5 mathes by finding the exact song title and artist match. Finaly, the link to listen at Spotify was obtained via ```<the_best_match>.external_urls.spotify```. We wrapped the title of the song with the link so users can listen to it at Spotify via clicking the title.
+The response JSON from Spotify looks like the sample response below. Among the top 5 matches we recieved from Spotify, we further refined these 5 matches by finding the exact song title and artist match. Finally, the link to listen at Spotify was obtained via ```<the_best_match>.external_urls.spotify```. We wrapped the title of the song with the link so users can listen to it at Spotify via clicking the title.
 
 Sample Response: 
 ```
