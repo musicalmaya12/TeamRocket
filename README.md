@@ -233,6 +233,9 @@ Meng Mu: Worked on the UI playlist view, made rest api call to spotify api to fe
 
 ### References and Libraries
 Spotify API: https://api.spotify.com/
+
 Genius API: https://docs.genius.com/
+
 Flair: https://github.com/flairNLP/flair
+
 FastAPI: https://fastapi.tiangolo.com/
