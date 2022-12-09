@@ -115,9 +115,12 @@ To quickly set up the backend, we used FastAPI `https://fastapi.tiangolo.com`. W
 ![image](https://user-images.githubusercontent.com/109922285/206603286-6990eecb-99d7-4f07-b93e-c4bef79e6828.png)
 FastAPI
 
+#### Usage of Flair for sentiment scores
+Flair is the NLP library we chose to use to process the songs in our database and our user-inputted phrase to generate a sentiment score. Flair is built on top of PyTorch and its' pre-trained sentiment analysis model is trained on the IMDB dataset. This pre-trained model allows us to perform sentiment analysis without having to train our own model. We use Flair's Sentence object to tokenize the songs lyrics and the user-inputted phrase and then run the predict function on the tokenized Sentence to get the outputted sentiment score (in the range 0.0-1.0) and sentiment ("POSITIVE" or "NEGATIVE"). The sentiment analysis functionality is built on top of BERT (Bidirectional Representation for Transformers).
+
 #### Generating sentiment scores for each song in our database and saving this information for the score matching algorithm
 
-After our database of 2000 songs was saved locally in a pickle file, we turned the file into a Pandas DataFrame and processed the lyrics for each song using Flair (https://github.com/flairNLP/flair). We created a Text Classifier and ran the lyrics for each song through the predict() function to get its' sentiment ('POSITIVE' or 'NEGATIVE') and the corresponding sentiment score (0 - 1.0). We created two new DataFrames, 'positive_df' and 'negative_df', where we split up the 'POSITIVE' labeled songs vs. the 'NEGATIVE' labeled songs. These two DataFrames contain the columns 'artiste', 'title', 'thumbnail', 'score', and 'label'. Then, we turned these two DataFrames into two new pickle files, '2000songs_negative_df.pkl' and '2000songs_positive_df.pkl', and saved them into our SongProcessor folder under our main app folder.
+After our database of 2000 songs was saved locally in a pickle file, we turned the file into a Pandas DataFrame and processed the lyrics for each song using Flair (https://github.com/flairNLP/flair) - described above. We created two new DataFrames, 'positive_df' and 'negative_df', where we split up the 'POSITIVE' labeled songs vs. the 'NEGATIVE' labeled songs. These two DataFrames contain the columns 'artiste', 'title', 'thumbnail', 'score', and 'label'. Then, we turned these two DataFrames into two new pickle files, '2000songs_negative_df.pkl' and '2000songs_positive_df.pkl', and saved them into our SongProcessor folder under our main app folder.
 
 #### The sentiment score matching algorithm
 
