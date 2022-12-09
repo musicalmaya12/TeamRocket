@@ -1,87 +1,194 @@
 import React from "react";
-import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { useNavigate } from "react-router-dom";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as ChartTooltip, Legend, ResponsiveContainer } from 'recharts';
+import Button from "@mui/material/Button";
+import Tooltip  from "@mui/material/Tooltip";
 
 import './stats.css';
 
 export default function Stats() {
+  let navigate = useNavigate();
 
   const data = [
     {
-      name: 'Page A',
-      uv: 4000,
-      pv: 2400,
-      amt: 2400,
+      name: 'Happy',
+      sentiment: 'positive',
+      good: true,
+      retries: 0,
+      tooNegative: 0,
+      tooPositive: 0
     },
     {
-      name: 'Page B',
-      uv: 3000,
-      pv: 1398,
-      amt: 2210,
+      name: 'Sad',
+      sentiment: 'negative',
+      good: false,
+      retries: 1,
+      tooNegative: 0,
+      tooPositive: 1,
     },
     {
-      name: 'Page C',
-      uv: 2000,
-      pv: 9800,
-      amt: 2290,
+      name: 'Bored',
+      sentiment: 'negative',
+      good: false,
+      retries: 3,
+      tooNegative: 1,
+      tooPositive: 2
     },
     {
-      name: 'Page D',
-      uv: 2780,
-      pv: 3908,
-      amt: 2000,
+      name: 'Bored',
+      sentiment: 'negative',
+      good: false,
+      retries: 0,
+      tooNegative: 0,
+      tooPositive: 0
     },
     {
-      name: 'Page E',
-      uv: 1890,
-      pv: 4800,
-      amt: 2181,
-    },
-    {
-      name: 'Page F',
-      uv: 2390,
-      pv: 3800,
-      amt: 2500,
-    },
-    {
-      name: 'Page G',
-      uv: 3490,
-      pv: 4300,
-      amt: 2100,
-    },
+      name: 'Bored',
+      sentiment: 'positive',
+      good: false,
+      retries: 2,
+      tooNegative: 1,
+      tooPositive: 2
+    }
   ];
 
   return (
     <div className="stats-container">
-      <LikeDislikeChart data={data} />
+      <div className="nav">
+        <Tooltip title="Change your Mood" placement="bottom">
+          <Button
+            variant="contained"
+            size="small"
+            id="back-button"
+            sx={{ backgroundColor: "rgb(0 0 0 / 20%) !important", "&:hover": { backgroundColor: "rgb(0 0 0 / 50%) !important" } }}
+            onClick={() => navigate("/")}
+          >
+            Back
+          </Button>
+        </Tooltip>
+        {/* <Tooltip title="Back to Playlist" placement="bottom">
+          <Button
+            variant="contained"
+            size="small"
+            id="playlist-button"
+            sx={{ backgroundColor: "rgb(0 0 0 / 20%) !important", "&:hover": { backgroundColor: "rgb(0 0 0 / 50%) !important" } }}
+            onClick={() => navigate("/playlist")}
+          >
+            Playlist
+          </Button>
+        </Tooltip> */}
+      </div>
+      <h1>Statistics</h1>
+      <AccuracyChart data={aggregateData(data)} />
+      <LikeDislikeChart data={aggregateData(data)} />
     </div>
   );
 }
 
 
-const LikeDislikeChart = ({data}) => {
+const LikeDislikeChart = ({ data }) => {
   return (
-    <div className="stats-container">
+    <div className="chart-container">
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
           width={500}
           height={300}
           data={data}
           margin={{
-            top: 5,
+            top: 10,
             right: 30,
             left: 20,
-            bottom: 5,
+            bottom: 10,
           }}
         >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis />
-          <Tooltip />
+          <CartesianGrid strokeDasharray="3 3" stroke="white" />
+          <XAxis dataKey="name" stroke="white" />
+          <YAxis stroke="white" />
+          <ChartTooltip />
           <Legend />
-          <Bar dataKey="pv" fill="#8884d8" />
-          <Bar dataKey="uv" fill="#82ca9d" />
+          <Bar dataKey="tooPositive" fill="#d8e897" name="too positive" />
+          <Bar dataKey="tooNegative" fill="#56d9ff" name="too negative" />
         </BarChart>
       </ResponsiveContainer>
     </div>
   );
+}
+
+const AccuracyChart = ({ data }) => {
+  return (
+    <div className="chart-container">
+      <ResponsiveContainer width="100%" height="100%">
+        <BarChart
+          width={500}
+          height={300}
+          data={data}
+          margin={{
+            top: 10,
+            right: 30,
+            left: 20,
+            bottom: 10,
+          }}
+        >
+          <CartesianGrid strokeDasharray="3 3" stroke="white" />
+          <XAxis dataKey="name" stroke="white" />
+          <YAxis stroke="white" />
+          <ChartTooltip />
+          <Legend />
+          <Bar dataKey="accuracy" fill="#ffcaca" />
+        </BarChart>
+      </ResponsiveContainer>
+    </div>
+  );
+}
+
+const aggregateData = (data) => {
+  const newData = [];
+
+  let negNum = 0;
+  let posNum = 0;
+  let total = 0;
+
+  let negative = {
+    name: "negative",
+    retries: 0,
+    accuracy: 0,
+    tooNegative: 0,
+    tooPositive: 0
+  }
+
+  let positive = {
+    name: "positive",
+    retries: 0,
+    accuracy: 0,
+    tooNegative: 0,
+    tooPositive: 0
+  }
+
+  data.forEach((stat) => {
+    total = total + 1;
+    if (stat.sentiment === "negative") {
+      negNum = negNum + 1;
+      negative.retries = (negative.retries + stat.retries) / negNum;
+      negative.tooNegative = (negative.tooNegative + stat.tooNegative);
+      negative.tooPositive = (negative.tooPositive + stat.tooPositive);
+
+      let accuracy = stat.retries > 0 ? 0 : 1;
+
+      negative.accuracy = (negative.accuracy + accuracy) / total;
+
+    } else if (stat.sentiment === "positive") {
+      posNum = posNum + 1;
+      positive.retries = (positive.retries + stat.retries) / posNum;
+      positive.tooNegative = (positive.tooNegative + stat.tooNegative);
+      positive.tooPositive = (positive.tooPositive + stat.tooPositive);
+
+      let accuracy = stat.retries > 0 ? 0 : 1;
+
+      positive.accuracy = (positive.accuracy + accuracy) / total;
+    }
+  })
+
+  newData.push(positive, negative);
+
+  return newData;
 }

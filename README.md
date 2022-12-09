@@ -210,7 +210,9 @@ The user interface is implemented using ReactJS. The user inputs a phrase and cl
 
 #### Gathering user feedback:
 
-The user is able to provide feedback for both the playlist results and for each song in the playlist result. There are three icons for feedback: "thumbs up", "happy face", and "sad face". Clicking the "thumbs up" indicates that the playlist or song matches the sentiment of the requested mood. Clicking the "happy face" indicates that the playlist or song needs to be more positive to match the mood. Clicking the "sad face" indicates that the playlist or song needs to be more negative to match the mood. If the user clicks the "happy face" or "sad face" icon for a playlist, the playlist re-generates in an attempt to output a playlist that better matches the sentiment. The metrics for each playlist and song are stored and displayed in a separate 'Stats' page.
+The user is able to provide feedback for both the playlist results and for each song in the playlist result. There are three icons for feedback: "thumbs up", "happy face", and "sad face". Clicking the "thumbs up" indicates that the playlist or song matches the sentiment of the requested mood. Clicking the "happy face" indicates that the playlist or song needs to be more positive to match the mood. Clicking the "sad face" indicates that the playlist or song needs to be more negative to match the mood. If the user clicks the "happy face" or "sad face" icon for a playlist, the playlist re-generates in an attempt to output a playlist that better matches the sentiment. The metrics for each playlist and song are stored and displayed in a separate 'Statistics' page.
+
+Currently, the Statistics page displays two charts, which compare the metrics between positive and negative playlists, as determined by the sentiment analysis algorithm. The first chart records how accurate the playlists matched the sentiment of the mood. The more times a playlist is re-generated, the less accurate the algorithm is for that sentiment. The second chart shows how many times a user chose "too negative" (sad face) or "too positive" (happy face) for each playlist sentiment. This gives further detail about what sentiment the algorithm tends to skew toward. 
 
 ### Team contributions:
 
@@ -218,7 +220,7 @@ Maya Subramanian: Processed the song data using Flair, created the sentiment sco
 
 Tayo Amuneke: 
 
-Jessica Nwaogbe:
+Jessica Nwaogbe: Created the input page and statistics page for the UI. Added the functionality for re-generating the playlists and recording the user feedback. 
 
 Meng Mu: Worked on the UI playlist view, made rest api call to spotify api to fetch song links and attached them to each song to allow users to listen to it.
 
