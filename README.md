@@ -214,6 +214,14 @@ The user interface is implemented using ReactJS. The user inputs a phrase and cl
 
 ![image](https://user-images.githubusercontent.com/109922285/206602546-8cbb67a7-3a1d-4c92-a148-ed874e0a31a9.png)
 
+![image](https://user-images.githubusercontent.com/109922285/206602740-00d71069-eafd-46b6-a105-7fc4b8c3169f.png)
+Playlist in the Positive range > 0.99
+
+![image](https://user-images.githubusercontent.com/109922285/206602828-71f9c5c6-40d7-416c-815b-d3ab3e9263cd.png)
+Playlist in the Negative range > 0.99
+
+
+
 
 
 #### Gathering user feedback:
@@ -221,6 +229,12 @@ The user interface is implemented using ReactJS. The user inputs a phrase and cl
 The user is able to provide feedback for both the playlist results and for each song in the playlist result. There are three icons for feedback: "thumbs up", "happy face", and "sad face". Clicking the "thumbs up" indicates that the playlist or song matches the sentiment of the requested mood. Clicking the "happy face" indicates that the playlist or song needs to be more positive to match the mood. Clicking the "sad face" indicates that the playlist or song needs to be more negative to match the mood. If the user clicks the "happy face" or "sad face" icon for a playlist, the playlist re-generates in an attempt to output a playlist that better matches the sentiment. The metrics for each playlist and song are stored and displayed in a separate 'Statistics' page.
 
 Currently, the Statistics page displays two charts, which compare the metrics between positive and negative playlists, as determined by the sentiment analysis algorithm. The first chart records how accurate the playlists matched the sentiment of the mood. The more times a playlist is re-generated, the less accurate the algorithm is for that sentiment. The second chart shows how many times a user chose "too negative" (sad face) or "too positive" (happy face) for each playlist sentiment. This gives further detail about what sentiment the algorithm tends to skew toward. 
+
+![image](https://user-images.githubusercontent.com/109922285/206603063-0d0af9cb-b366-4d06-ba26-775b007287b9.png)
+Playlist with user feedback to make it more positive
+
+![image](https://user-images.githubusercontent.com/109922285/206603148-b29df2c2-9502-4116-b0c8-a43d3e442615.png)
+Playlist with user feedback to make it more negative
 
 ### Team contributions:
 
