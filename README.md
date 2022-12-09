@@ -256,7 +256,7 @@ Jessica Nwaogbe: Created the input page and statistics page for the UI. Added th
 
 Meng Mu: Worked on the UI playlist view, made rest api call to spotify api to fetch song links and attached them to each song to allow users to listen to it.
 
-
+### Challenges
 
 ### References and Libraries
 Spotify API: https://api.spotify.com/
