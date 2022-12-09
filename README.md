@@ -116,7 +116,7 @@ To quickly set up the backend, we used FastAPI `https://fastapi.tiangolo.com`. W
 FastAPI
 
 #### Usage of Flair for sentiment scores
-Flair is the NLP library we chose to use to process the songs in our database and our user-inputted phrase to generate a sentiment score. Flair is built on top of PyTorch and its' pre-trained sentiment analysis model is trained on the IMDB dataset. This pre-trained model allows us to perform sentiment analysis without having to train our own model. We use Flair's Sentence object to tokenize the songs lyrics and the user-inputted phrase and then run the predict function on the tokenized Sentence to get the outputted sentiment score (in the range 0.0-1.0) and sentiment ("POSITIVE" or "NEGATIVE"). The sentiment analysis functionality is built on top of BERT (Bidirectional Representation for Transformers).
+Flair is the NLP library we chose to use to process the songs in our database and our user-inputted phrase to generate a sentiment score. Flair is built on top of PyTorch and its' pre-trained sentiment analysis model is trained on the IMDB dataset. This pre-trained model allows us to perform sentiment analysis without having to train our own model. We use Flair's Sentence object to tokenize the songs' lyrics and the user-inputted phrase and then run the predict function on the tokenized Sentence to get the outputted sentiment score (in the range 0.0-1.0) and sentiment ("POSITIVE" or "NEGATIVE"). The sentiment analysis functionality is built on top of BERT (Bidirectional Representation for Transformers).
 
 #### Generating sentiment scores for each song in our database and saving this information for the score matching algorithm
 
