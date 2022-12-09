@@ -28,6 +28,13 @@ def fetch():
     return {"Team Name": "Rocket"}
 
 
+@app.get("/health")
+def health():
+    return {
+        "Health": "excellent",
+        "negative count": flair_processor.negative_df.shape[0],
+        "positive count": flair_processor.positive_df.shape[0]
+    }
 
 @app.post("/get_mood_songs/")
 async def get_mood_songs(request: MoodRequest):

@@ -1,9 +1,17 @@
 # The Mood Playlist Generator
 
-### How to use the application:
+### Overview
+The Mood Playlist Generator is an application that uses sentiment analysis to generate "smart" playlists depending on a user's mood. We retrieve song information from the Spotify API and lyrics from the Genius API and store this data in a local datastore. We process this data using Flair, a natural language processing library, for sentiment analysis on the song information and user-inputted phrase. We use a matching algorithm between the phrase and songs to output a playlist with ten songs that can be listened to on Spotify.
+
+### Video demo (please download the video for full high-quality resolution)
+https://drive.google.com/file/d/146cqUF1BjlVZfNuvATw1R7auFf1vTnFb/view?usp=sharing
+
+### How to use the application
 
 Clone this repository to your local machine.
 If you do not have Python 3.6, install that first.
+
+If you're facing issues with setup in your local machine, please run the app in your favorite virtual environment.
 
 To run the app, follow these steps (one time installation):
 1. `cd app`
@@ -87,28 +95,42 @@ Sample Response
   ]
 }
 ```
-### How the application is implemented:
+### How the application is implemented
 
-#### Creating our database of songs:
+#### Creating our database of songs
+The song data was obtained from the GeniusAPI. To use this API we needed to pass in the name of the artiste to find their associated top songs. We used MTVBase top artistes we found on GitHub. We passed this into the GeniusAPI object in this format
+```
+genius = Genius(TOKEN, retries=3)
+songs = genius.search_artist(artiste, sort="popularity", max_songs=SONG_COUNT)
+```
 
-#### Creating our API using FastAPI:
+This data was not labelled and postprocessing steps had to be done in the processing stage. The API was slow and took a large amount of time to fully get all the songs. An alternative to this approach would have been to use the million songs dataset `http://millionsongdataset.com` which has labelled data in a bag of words format. The draw back to using it is that we lose the word ordering and the sentence-piece module in Flair would not understand word ordering.
 
-#### Generating sentiment scores for each song in our database and saving this information for the score matching algorithm:
+
+#### Creating our API using FastAPI
+To quickly set up the backend, we used FastAPI `https://fastapi.tiangolo.com`. We exposed two endpoints 
+1. `/get_mood` to accept post requests from the client. This endpoint returns the sentiment and the list of songs curated for that sentiment and takes in the phrase. It returns 400 response code for bad request.
+2. `health` to return the health of the app. 
+
+![image](https://user-images.githubusercontent.com/109922285/206603286-6990eecb-99d7-4f07-b93e-c4bef79e6828.png)
+FastAPI
+
+#### Generating sentiment scores for each song in our database and saving this information for the score matching algorithm
 
 After our database of 2000 songs was saved locally in a pickle file, we turned the file into a Pandas DataFrame and processed the lyrics for each song using Flair (https://github.com/flairNLP/flair). We created a Text Classifier and ran the lyrics for each song through the predict() function to get its' sentiment ('POSITIVE' or 'NEGATIVE') and the corresponding sentiment score (0 - 1.0). We created two new DataFrames, 'positive_df' and 'negative_df', where we split up the 'POSITIVE' labeled songs vs. the 'NEGATIVE' labeled songs. These two DataFrames contain the columns 'artiste', 'title', 'thumbnail', 'score', and 'label'. Then, we turned these two DataFrames into two new pickle files, '2000songs_negative_df.pkl' and '2000songs_positive_df.pkl', and saved them into our SongProcessor folder under our main app folder.
 
-#### The sentiment score matching algorithm:
+#### The sentiment score matching algorithm
 
 We used the Flair sentiment analysis functionality to get the sentiment score for our user-inputted phrase, as well. This allows the scores for the user-inputted phrase and the song library to be on the same scale. After getting the sentiment score of the user's phrase, we check if the sentiment is positive or negative. If positive, we compare the user's numerical sentiment score to the song's numerical sentence scores in 2000songs_positive_df and return back the 10 songs with the closest sentiment scores. To calculate this, we use nsmallest from heapq and get the 10 scores with the smallest difference from the user-inputted phrase (hence, the closest scores). We do the same thing with negative songs but use 2000songs_negative_df instead. We then gather all the information for the 10 closest songs and return them in an array along with the sentiment label and score. The data returned is fetched from the API when the user enters a phrase and clicks Submit in the application.
 
-#### Usage of the Spotify API to link our playlist to Spotify:
+#### Usage of the Spotify API to link our playlist to Spotify
 
-We used Spotify API to fetch the information of the songs. First we generated a token from Spotify using https://accounts.spotify.com/api/token. Then with the token, we proceeded to obtain details of the songs using "Search for Item" API (https://api.spotify.com/v1/search). To use the Spotify "Search for Item" API (read more: https://developer.spotify.com/documentation/web-api/reference/#/operations/search), we passed 3 parameters to it, **q**, **type** and **limit**. 
+We used the Spotify API to fetch the information of the songs. First, we generated a token from Spotify using https://accounts.spotify.com/api/token. Then with the token, we proceeded to obtain details of the songs using "Search for Item" API (https://api.spotify.com/v1/search). To use the Spotify "Search for Item" API (read more: https://developer.spotify.com/documentation/web-api/reference/#/operations/search), we passed 3 parameters to it, **q**, **type** and **limit**. 
   - **q** (required): it allows filters including *album, artist, track, year, upc, tag:hipster, tag:new, isrc*, and *genre* to filter out irrelevant matches. We used *track* and *artist* to refine the matches.
   - **type** (required): we used *type: 'track'* to get information about the track.
   - **limit** (optional): we set *limit: 5* to get the top 5 matches.
 
-The response JSON from Spotify looks like the sample response below. Among the top 5 mathes we recieved from Spotify, we further refined these 5 mathes by finding the exact song title and artist match. Finaly, the link to listen at Spotify was obtained via ```<the_best_match>.external_urls.spotify```. We wrapped the title of the song with the link so users can listen to it at Spotify via clicking the title.
+The response JSON from Spotify looks like the sample response below. Among the top 5 matches we recieved from Spotify, we further refined these 5 matches by finding the exact song title and artist match. Finally, the link to listen at Spotify was obtained via ```<the_best_match>.external_urls.spotify```. We wrapped the title of the song with the link so users can listen to it at Spotify via clicking the title.
 
 Sample Response: 
 ```
@@ -193,20 +215,50 @@ Sample Response:
 }
 ```
 
-#### The UI:
+#### The UI
 The user interface is implemented using ReactJS. The user inputs a phrase and clicks Submit, which takes them to their personalized mood playlist. The background of their playlist page is customized based on the range of their positive or negative sentiment score. The highest range is > 0.99 (both highly positive or highly negative), which results in the lightest background for the positive range and darkest background for the negative range (both ranges: > 0.99, > 0.97 & < 0.99, > 0.90 & < 0.97, > 0.80 & < 0.90, < 0.80). The background color gradients proceedingly get darker the less positive the playlist becomes, and lighter the less negative it becomes. We also give users a little message at the top above the playlist tailored to their mood. To listen to the songs, users can click on the title of the song and it will take them to spotify in a seperate tab. Users can also regenerate their mood list by hitting the back button.
 
+![image](https://user-images.githubusercontent.com/109922285/206602546-8cbb67a7-3a1d-4c92-a148-ed874e0a31a9.png)
 
-#### Gathering user feedback:
+![image](https://user-images.githubusercontent.com/109922285/206602740-00d71069-eafd-46b6-a105-7fc4b8c3169f.png)
+Playlist in the Positive range > 0.99
 
-The user is able to provide feedback for both the playlist results and for each song in the playlist result. There are three icons for feedback: "thumbs up", "happy face", and "sad face". Clicking the "thumbs up" indicates that the playlist or song matches the sentiment of the requested mood. Clicking the "happy face" indicates that the playlist or song needs to be more positive to match the mood. Clicking the "sad face" indicates that the playlist or song needs to be more negative to match the mood. If the user clicks the "happy face" or "sad face" icon for a playlist, the playlist re-generates in an attempt to output a playlist that better matches the sentiment. The metrics for each playlist and song are stored and displayed in a separate 'Stats' page.
+![image](https://user-images.githubusercontent.com/109922285/206602828-71f9c5c6-40d7-416c-815b-d3ab3e9263cd.png)
+Playlist in the Negative range > 0.99
 
-### Team contributions:
+
+
+
+
+#### Gathering user feedback
+
+The user is able to provide feedback for both the playlist results and for each song in the playlist result. There are three icons for feedback: "thumbs up", "happy face", and "sad face". Clicking the "thumbs up" indicates that the playlist or song matches the sentiment of the requested mood. Clicking the "happy face" indicates that the playlist or song needs to be more positive to match the mood. Clicking the "sad face" indicates that the playlist or song needs to be more negative to match the mood. If the user clicks the "happy face" or "sad face" icon for a playlist, the playlist re-generates in an attempt to output a playlist that better matches the sentiment. The metrics for each playlist and song are stored and displayed in a separate 'Statistics' page.
+
+Currently, the Statistics page displays two charts, which compare the metrics between positive and negative playlists, as determined by the sentiment analysis algorithm. The first chart records how accurate the playlists matched the sentiment of the mood. The more times a playlist is re-generated, the less accurate the algorithm is for that sentiment. The second chart shows how many times a user chose "too negative" (sad face) or "too positive" (happy face) for each playlist sentiment. This gives further detail about what sentiment the algorithm tends to skew toward. 
+
+![image](https://user-images.githubusercontent.com/109922285/206603063-0d0af9cb-b366-4d06-ba26-775b007287b9.png)
+Playlist with user feedback to make it more positive
+
+![image](https://user-images.githubusercontent.com/109922285/206603148-b29df2c2-9502-4116-b0c8-a43d3e442615.png)
+Playlist with user feedback to make it more negative
+
+### Team contributions
 
 Maya Subramanian: Processed the song data using Flair, created the sentiment score matching algorithm, customized the UI backgrounds and phrases returned based on sentiment score ranges
 
-Tayo Amuneke: 
+Tayo Amuneke: Created the FastAPI endpoint. Set up the Lyrics fetcher for songs from the Lyrics API
 
-Jessica Nwaogbe:
+Jessica Nwaogbe: Created the input page and statistics page for the UI. Added the functionality for re-generating the playlists and recording the user feedback. 
 
 Meng Mu: Worked on the UI playlist view, made rest api call to spotify api to fetch song links and attached them to each song to allow users to listen to it.
+
+
+
+### References and Libraries
+Spotify API: https://api.spotify.com/
+
+Genius API: https://docs.genius.com/
+
+Flair: https://github.com/flairNLP/flair
+
+FastAPI: https://fastapi.tiangolo.com/

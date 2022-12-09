@@ -28,6 +28,12 @@ h1 {
     text-align: center;
 }
 
+h2 {
+    margin: 0;
+    padding-top: 25px;
+    text-align: center;
+}
+
 #back-button {
     margin-right: 10px;
     position: relative;

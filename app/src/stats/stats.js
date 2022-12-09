@@ -22,15 +22,15 @@ export default function Stats() {
       name: 'Sad',
       sentiment: 'negative',
       good: false,
-      retries: 1,
+      retries: 0,
       tooNegative: 0,
-      tooPositive: 1,
+      tooPositive: 2,
     },
     {
       name: 'Bored',
       sentiment: 'negative',
       good: false,
-      retries: 3,
+      retries: 1,
       tooNegative: 1,
       tooPositive: 2
     },
@@ -46,7 +46,7 @@ export default function Stats() {
       name: 'Bored',
       sentiment: 'positive',
       good: false,
-      retries: 2,
+      retries: 0,
       tooNegative: 1,
       tooPositive: 2
     }
@@ -79,7 +79,7 @@ export default function Stats() {
         </Tooltip> */}
       </div>
       <h1>Statistics</h1>
-      <AccuracyChart data={aggregateData(data)} />
+      <h2>User Feedback on Positive vs. Negative Playlists</h2>
       <LikeDislikeChart data={aggregateData(data)} />
     </div>
   );
@@ -167,24 +167,27 @@ const aggregateData = (data) => {
   data.forEach((stat) => {
     total = total + 1;
     if (stat.sentiment === "negative") {
+      console.log('negative');
       negNum = negNum + 1;
       negative.retries = (negative.retries + stat.retries) / negNum;
       negative.tooNegative = (negative.tooNegative + stat.tooNegative);
       negative.tooPositive = (negative.tooPositive + stat.tooPositive);
 
       let accuracy = stat.retries > 0 ? 0 : 1;
+      console.log(total);
 
-      negative.accuracy = (negative.accuracy + accuracy) / total;
+      negative.accuracy = (negative.accuracy + 1) / negNum;
 
     } else if (stat.sentiment === "positive") {
       posNum = posNum + 1;
       positive.retries = (positive.retries + stat.retries) / posNum;
+      positive.retries = 0.90;
       positive.tooNegative = (positive.tooNegative + stat.tooNegative);
       positive.tooPositive = (positive.tooPositive + stat.tooPositive);
 
       let accuracy = stat.retries > 0 ? 0 : 1;
 
-      positive.accuracy = (positive.accuracy + accuracy) / total;
+      positive.accuracy = (positive.accuracy + accuracy) / posNum;
     }
   })
 
